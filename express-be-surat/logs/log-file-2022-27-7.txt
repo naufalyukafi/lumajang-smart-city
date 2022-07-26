@@ -1,0 +1,8 @@
+[7/27/2022, 05:33:57] [404 - Not Found] /api/v1/auth/register GET 16,954ms 
+[7/27/2022, 05:34:03] [403 - Forbidden] /api/v1/auth/register POST 354,082ms 
+[7/27/2022, 05:34:16] [200 - OK] /api/v1/auth/register POST 530,468ms 
+[7/27/2022, 05:36:37] [404 - Not Found] /api/v1/auth/login GET 16,407ms 
+[7/27/2022, 05:36:43] [200 - OK] /api/v1/auth/login POST 470,394ms 
+[7/27/2022, 05:37:14] [200 - OK] /api/v1/auth/login POST 563,403ms 
+[7/27/2022, 05:57:48] [200 - OK] /api/v1/auth/login POST 707,342ms 
+[7/27/2022, 06:04:55] [200 - OK] /api/v1/auth/login POST 588,16ms 
