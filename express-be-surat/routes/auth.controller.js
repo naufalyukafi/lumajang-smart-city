@@ -95,7 +95,6 @@ const loginUser = async (req, res) => {
     })
     .then(async (resultt) => {
       const data = resultt[0];
-      console.log(data);
 
       if (data) {
         //VALID Password
@@ -106,7 +105,6 @@ const loginUser = async (req, res) => {
             message: "Password yang anda masukkan salah",
           });
         }
-        console.log("idny cu ", data.id)
         const token = jwt.sign(
           {
             id: data.id,
@@ -116,7 +114,7 @@ const loginUser = async (req, res) => {
             phone: data.phone,
             authorize: data.role_name,
           },
-          "heritage",
+          "lumajang",
           {
             expiresIn: "5h",
           }

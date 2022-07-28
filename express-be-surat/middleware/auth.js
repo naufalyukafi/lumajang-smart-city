@@ -7,14 +7,14 @@ exports.verifikasi = (roles) => {
     if (tokewithBearer) {
       const token = tokewithBearer.split(" ")[1];
       //verif
-      jwt.verify(token, "lumajang", function (err, decoded) {
-        if (err)
+      jwt.verify(token, "lumajang", function(err, decoded) {
+        if (err) {
           return rest.status(401).send({
             auth: false,
             message:
               "Sesi Telah berahir, refresh halaman ini dan ulangi kembali",
           });
-        else {
+        } else {
           if (roles.includes(decoded.authorize)) {
             req.auth = decoded;
             next();
