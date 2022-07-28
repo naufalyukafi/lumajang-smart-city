@@ -1,9 +1,8 @@
 import React from 'react'
-import Navbar from '../component/Navbar'
 import Hero from '../component/Hero'
 import Activity from '../component/Activity'
 import Footer from '../component/Footer'
-import Form from '../elements/Form/Form'
+import Form from '../elements/form/form'
 import NavbarMenu from '../component/NavbarMenu'
 
 const LandingPage = () => {
@@ -11,14 +10,17 @@ const LandingPage = () => {
         <NavbarMenu />
         {/* <Navbar /> */}
         <Hero />
-        <div class="p-8 mx-auto">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 lg:gap-8 w-[80%] mx-auto">
-                <div class="p-4 rounded-md flex items-center justify-center">
+        <div className="p-8 mx-auto">
+            <div className="grid grid-cols-1 desktop:grid-cols-2 laptop:grid-cols-2 gap-4 w-4/5 mx-auto">
+                <div className=" laptop:h-64 grid gap-x-0 rounded-md flex items-start justify-center handphone:grid-cols-1 tablet:grid-cols-2 laptop:grid-cols-2 desktop:grid-cols-2">
+                    <Activity />
+                    <Activity />
+                    <Activity />
                     <Activity />
                     <Activity />
                     <Activity />
                 </div>
-                <div class="p-4 rounded-md flex items-center justify-center">
+                <div className="p-4 rounded-md flex items-center justify-center">
                     <Form />
                 </div>
             </div>
