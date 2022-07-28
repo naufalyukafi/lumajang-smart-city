@@ -6,24 +6,24 @@ import Youtube from '../assets/icons/ic-youtube.png'
 
 const Footer = () => {
     return (
-        <footer class="bg-white rounded-lg shadow md:px-6 md:py-8 dark:bg-gray-900">
-            <div class="">
-                <div class="grid grid-cols-1 md:grid-cols-2 md:justify-center  lg:grid-cols-3 gap-4 lg:gap-8">
-                    <div class="p-4 rounded-md items-center md:justify-center">
+        <footer className="bg-white rounded-lg md:px-6 md:py-8 dark:bg-gray-900 laptop:my-16 my-10">
+            <div className="">
+                <div className="grid grid-cols-1 tablet:grid-cols-1 laptop:grid-cols-3 gap-4 lg:gap-8 justify-center handphone:items-center">
+                    <div className="p-4 rounded-md items-center md:justify-center handphone:text-center text-left">
                         <p className='font-bold'>PEMERINTAH KABUPATEN LUMAJANG</p>
                         <p>Jalan Alun - Alun Utara No.7 Lumajang</p>
                         <p>Telp. 0334-881146-881255</p>
                     </div>
-                    <div class="p-4 rounded-md items-center md:justify-center">
+                    <div className="p-4 rounded-md items-center md:justify-center">
                         <p className='font-bold uppercase text-center'>Follow Us</p>
-                        <div className="flex justify-center m-2">
-                            <img src={Twitter} alt="" className='mx-2 w-11 h-11 ' />
-                            <img src={Instagram} alt="" className='mx-2 w-11 h-11 ' />
-                            <img src={Facebook} alt="" className='mx-2 w-11 h-11 ' />
-                            <img src={Youtube} alt="" className='mx-2 w-11 h-11 ' />
+                        <div className="flex justify-center m-3">
+                            <a href=""><img src={Twitter} alt="" className='mx-2 w-11 h-11 cursor-pointer' /></a>
+                            <a href=""><img src={Instagram} alt="" className='mx-2 w-11 h-11 cursor-pointer' /></a>
+                            <a href=""><img src={Facebook} alt="" className='mx-2 w-11 h-11 ' /></a>
+                            <a href=""><img src={Youtube} alt="" className='mx-2 w-11 h-11 ' /></a>
                         </div>
                     </div>
-                    <div class="p-4 rounded-md text-right items-center md:justify-center lg:text-right sm:text-center md:text-center">
+                    <div className="p-4 rounded-md text-right items-center md:justify-center lg:text-right handphone:text-center md:text-center">
                         <div>Anda Pengunjung Ke</div>
                         <div>118.780</div>
                         <div className='font-bold mt-2'>V 2022.1</div>
