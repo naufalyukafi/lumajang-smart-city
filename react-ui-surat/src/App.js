@@ -1,10 +1,23 @@
+import './index.css';
 import LandingPage from "./pages/LandingPage";
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import HalBerita from './pages/HalBerita';
+import DetailBerita from './pages/DetailBerita';
+import Login from './pages/Login';
+import Register from './pages/Register'
 
 function App() {
   return (
     <div className="App">
-      <h1 className="text-red-600">Haii</h1>
-      <LandingPage />
+      <BrowserRouter>
+        <Routes>
+          <Route path='/' element={<LandingPage />} />
+          <Route path='/berita' element={<HalBerita />} />
+          <Route path='/detail' element={<DetailBerita />} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/register' element={<Register />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }

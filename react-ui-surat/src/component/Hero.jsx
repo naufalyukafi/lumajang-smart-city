@@ -3,8 +3,8 @@ import ImageHero from '../assets/images/img-hero.png'
 
 const Hero = () => {
     return (
-        <div>
-            <img src={ImageHero} alt={ImageHero} />
+        <div className=''>
+            <img src={ImageHero} alt={ImageHero} className="h-96 max-w-full h-auto" />
         </div>
     )
 }
