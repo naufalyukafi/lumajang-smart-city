@@ -4,9 +4,9 @@ module.exports = {
     await queryInterface.createTable('pegawais', {
       nik: {
         allowNull: false,
-        autoIncrement: true,
+        autoIncrement: false,
         primaryKey: true,
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
       },
       nama: {
         type: Sequelize.STRING,

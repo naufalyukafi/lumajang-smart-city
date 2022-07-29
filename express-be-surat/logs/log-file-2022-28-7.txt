@@ -37,3 +37,15 @@
 [7/28/2022, 10:45:18] [200 - OK] /api/v1/saran GET 32,343ms 
 [7/28/2022, 10:45:26] [200 - OK] /api/v1/saran POST 111,12ms 
 [7/28/2022, 10:45:30] [200 - OK] /api/v1/saran GET 10,746ms 
+[7/28/2022, 13:16:34] [403 - Forbidden] /api/v1/poskamling POST 139,955ms 
+[7/28/2022, 13:17:02] [200 - OK] /api/v1/poskamling POST 299,867ms 
+[7/28/2022, 13:18:09] [404 - Not Found] /api/v1/poskamling PUT 7,847ms 
+[7/28/2022, 13:19:06] [200 - OK] /api/v1/poskamling GET 176,992ms 
+[7/28/2022, 13:19:17] [200 - OK] /api/v1/poskamling GET 23,977ms 
+[7/28/2022, 13:19:31] [403 - Forbidden] /api/v1/poskamling/1 PUT 87,969ms 
+[7/28/2022, 13:19:52] [200 - OK] /api/v1/poskamling/1 PUT 420,675ms 
+[7/28/2022, 13:19:59] [200 - OK] /api/v1/poskamling GET 28,83ms 
+[7/28/2022, 13:20:12] [200 - OK] /api/v1/poskamling POST 39,214ms 
+[7/28/2022, 13:20:20] [200 - OK] /api/v1/poskamling GET 9,055ms 
+[7/28/2022, 13:20:36] [200 - OK] /api/v1/poskamling/2 DELETE 20,383ms 
+[7/28/2022, 13:20:44] [200 - OK] /api/v1/poskamling GET 14,192ms 

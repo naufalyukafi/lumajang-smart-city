@@ -1,0 +1,44 @@
+[7/29/2022, 05:44:49] [200 - OK] /api/v1/auth/login POST 522,044ms 
+[7/29/2022, 05:45:07] [403 - Forbidden] /api/v1/penduduk POST 425,082ms 
+[7/29/2022, 05:47:30] [501 - Not Implemented] /api/v1/penduduk POST 242,645ms 
+[7/29/2022, 05:49:14] [501 - Not Implemented] /api/v1/penduduk POST 270,079ms 
+[7/29/2022, 05:49:48] [200 - OK] /api/v1/penduduk POST 277,152ms 
+[7/29/2022, 05:51:36] [501 - Not Implemented] /api/v1/penduduk POST 263,807ms 
+[7/29/2022, 08:23:06] [200 - OK] /api/v1/auth/login POST 198,313ms 
+[7/29/2022, 08:23:18] [200 - OK] /api/v1/auth/register POST 342,669ms 
+[7/29/2022, 08:23:25] [200 - OK] /api/v1/auth/login POST 290,625ms 
+[7/29/2022, 08:23:45] [501 - Not Implemented] /api/v1/penduduk POST 445,365ms 
+[7/29/2022, 08:24:54] [200 - OK] /api/v1/saran POST 46,42ms 
+[7/29/2022, 08:25:01] [401 - Unauthorized] /api/v1/saran GET 6,919ms 
+[7/29/2022, 08:25:11] [200 - OK] /api/v1/saran GET 23,11ms 
+[7/29/2022, 08:25:23] [401 - Unauthorized] /api/v1/poskamling POST 3,343ms 
+[7/29/2022, 08:25:30] [200 - OK] /api/v1/poskamling POST 31,058ms 
+[7/29/2022, 08:25:35] [200 - OK] /api/v1/poskamling GET 20,237ms 
+[7/29/2022, 08:27:46] [501 - Not Implemented] /api/v1/penduduk POST 21,549ms 
+[7/29/2022, 08:32:27] [501 - Not Implemented] /api/v1/penduduk POST 414,618ms 
+[7/29/2022, 08:33:30] [501 - Not Implemented] /api/v1/penduduk POST 277,685ms 
+[7/29/2022, 08:35:10] [200 - OK] /api/v1/penduduk POST 290,273ms 
+[7/29/2022, 08:35:19] [200 - OK] /api/v1/penduduk GET 24,146ms 
+[7/29/2022, 08:35:53] [401 - Unauthorized] /api/v1/penduduk/1941720040 PUT 5,26ms 
+[7/29/2022, 08:36:12] [200 - OK] /api/v1/penduduk/1941720040 PUT 38,621ms 
+[7/29/2022, 08:36:19] [200 - OK] /api/v1/penduduk GET 10,812ms 
+[7/29/2022, 08:37:21] [403 - Forbidden] /api/v1/penduduk POST 140,968ms 
+[7/29/2022, 08:37:46] [501 - Not Implemented] /api/v1/penduduk POST 146,141ms 
+[7/29/2022, 08:38:05] [200 - OK] /api/v1/penduduk POST 31,674ms 
+[7/29/2022, 08:38:16] [200 - OK] /api/v1/penduduk GET 30,549ms 
+[7/29/2022, 08:38:50] [404 - Not Found] /api/v1/penduduk/1941720041 POST 3,381ms 
+[7/29/2022, 08:39:08] [200 - OK] /api/v1/penduduk/1941720041 DELETE 30,54ms 
+[7/29/2022, 08:39:15] [200 - OK] /api/v1/penduduk GET 11,887ms 
+[7/29/2022, 09:33:04] [200 - OK] /api/v1/pegawai POST 1.154,214ms 
+[7/29/2022, 09:34:59] [403 - Forbidden] /api/v1/pegawai POST 118,584ms 
+[7/29/2022, 09:35:20] [403 - Forbidden] /api/v1/pegawai POST 17,237ms 
+[7/29/2022, 09:35:44] [200 - OK] /api/v1/pegawai POST 342,427ms 
+[7/29/2022, 09:35:59] [200 - OK] /api/v1/pegawai GET 40,62ms 
+[7/29/2022, 09:36:16] [200 - OK] /api/v1/pegawai/1941720041 DELETE 34,634ms 
+[7/29/2022, 09:36:21] [200 - OK] /api/v1/pegawai GET 12,602ms 
+[7/29/2022, 09:36:26] [200 - OK] /api/v1/pegawai POST 30,013ms 
+[7/29/2022, 09:36:49] [403 - Forbidden] /api/v1/penduduk/1941720041 PUT 10,839ms 
+[7/29/2022, 09:37:33] [403 - Forbidden] /api/v1/pegawai/1941720041 PUT 16,398ms 
+[7/29/2022, 09:37:46] [403 - Forbidden] /api/v1/pegawai/1941720041 PUT 8,577ms 
+[7/29/2022, 09:37:53] [200 - OK] /api/v1/pegawai/1941720041 PUT 31,26ms 
+[7/29/2022, 09:38:03] [200 - OK] /api/v1/pegawai GET 12,391ms 
