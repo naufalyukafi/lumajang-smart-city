@@ -14,6 +14,11 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   pegawai.init({
+    nik: {
+      type: DataTypes.STRING,
+      autoIncrement: false,
+      primaryKey: true
+    },
     nama: DataTypes.STRING,
     alamat: DataTypes.TEXT,
     jabatan: DataTypes.STRING,
