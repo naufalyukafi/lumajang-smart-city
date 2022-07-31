@@ -18,7 +18,7 @@ const Register = () => {
                         <div className="desktop:w-full laptop:w-full">
                             <h1 className="font-bold text-center text-2xl laptop:my-6 handphone:my-6">Buat Akun Anda</h1>
                             <div className=" w-full rounded-lg divide-y ">
-                                <div class="px-5 py-7">
+                                <div className="px-5 py-7">
                                     {/* Nama */}
                                     <label className="font-semibold text-lg text-gray-600 pb-1 block">Nama</label>
                                     <input type="text" className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full" placeholder="Masukkan Nama" />
