@@ -6,6 +6,9 @@ const aduanController = require("./aduan.controller")
 const posKamlingController = require("./kamling.controller")
 const pendudukController = require("./penduduk.controller")
 const pegawaiController = require("./pegawai.controller")
+const blogController = require("./blog.controller")
+const laporanKependudukanController = require("./laporanKependudukan.controller")
+const fasilitasiPertanahanController = require("./fasilitasiPertanahan.controller")
 
 // Auth
 router.post("/auth/login", authController.loginUser)
@@ -38,6 +41,27 @@ router.get("/pegawai", pegawaiController.getAllPegawai);
 router.post("/pegawai",  auth.verifikasi(["admin", 'rt', 'rw']), pegawaiController.newPegawai);
 router.put("/pegawai/:nik", auth.verifikasi(["admin", 'rt', 'rw']), pegawaiController.updatePegawai);
 router.delete("/pegawai/:nik", auth.verifikasi(["admin", 'rt', 'rw']), pegawaiController.deletePegawai);
+
+// Blog
+router.get("/blogs", blogController.getAllBlogs)
+router.get("/blogs/highlight", blogController.getHighlight)
+router.get("/blog/:label_slug", blogController.detailBlog)
+router.put("/blog/content/:id", auth.verifikasi("admin"), blogController.updateBlogContent)
+router.put("/blog/contenttitle/:id", auth.verifikasi("admin"), blogController.updateBlogContentTitle)
+router.put("/blog/:id", auth.verifikasi("admin"), blogController.updateBlog)
+router.post("/blog/newpage", auth.verifikasi("admin"), blogController.createNewBlog)
+router.delete("/blog/:id", auth.verifikasi("admin"), blogController.deleteBlogById)
+
+// Laporan Kependudukan
+router.get("/laporan-kependudukan", laporanKependudukanController.getAllLaporanKependudukan);
+router.put("/laporan-kependudukan/:id", auth.verifikasi(["admin", 'rt', 'rw']), laporanKependudukanController.updateLaporanKependudukan);
+router.delete("/laporan-kependudukan/:id", auth.verifikasi(["admin", 'rt', 'rw']), laporanKependudukanController.deleteLaporanKependudukan);
+
+// Fasilitasi Pertanahan
+router.get("/fasilitasi-pertanahan", fasilitasiPertanahanController.getAllFasilitasiPertanahan);
+router.post("/fasilitasi-pertanahan",  auth.verifikasi(["admin", 'rt', 'rw', "aduan_masyarakat"]), fasilitasiPertanahanController.newFasilitasiPertanahan);
+router.put("/fasilitasi-pertanahan/:id", auth.verifikasi(["admin", 'rt', 'rw', "aduan_masyarakat"]), fasilitasiPertanahanController.updateFasilitasiPertanahan);
+router.delete("/fasilitasi-pertanahan/:id", auth.verifikasi(["admin", 'rt', 'rw', "aduan_masyarakat"]), fasilitasiPertanahanController.deleteFasilitasiPertanahan);
 
 
 module.exports = router
