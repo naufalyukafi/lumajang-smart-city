@@ -10,7 +10,7 @@ const Admin = () => {
         animationEnabled: true,
         theme: "light2",
         title: {
-            text: "Stock Price of BMW - March 2018"
+            text: "Jumlah Aduan - March 2018"
         },
         axisX: {
             valueFormatString: "DD MMM",
@@ -20,8 +20,8 @@ const Admin = () => {
             }
         },
         axisY: {
-            title: "Closing Price (in EUR)",
-            valueFormatString: "€##0.00",
+            title: "",
+            valueFormatString: "",
             crosshair: {
                 enabled: true,
                 snapToDataPoint: true,
