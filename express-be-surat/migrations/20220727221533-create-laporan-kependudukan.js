@@ -14,11 +14,8 @@ module.exports = {
       RW: {
         type: Sequelize.INTEGER
       },
-      tanggal_pelaporan: {
-        type: Sequelize.BIGINT
-      },
       luas_wilayah: {
-        type: Sequelize.INTEGER
+        type: Sequelize.TEXT
       },
       batas_utara: {
         type: Sequelize.TEXT

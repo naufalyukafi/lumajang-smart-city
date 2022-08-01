@@ -1,0 +1,59 @@
+[8/1/2022, 06:12:09] [200 - OK] /api/v1/auth/login POST 724,856ms 
+[8/1/2022, 06:33:21] [403 - Forbidden] /api/v1/blog/newpage POST 124,279ms 
+[8/1/2022, 06:36:11] [200 - OK] /api/v1/blog/newpage POST 338,663ms 
+[8/1/2022, 06:36:49] [200 - OK] /api/v1/blog/newpage POST 30,508ms 
+[8/1/2022, 06:37:14] [404 - Not Found] /api/v1/blog GET 8,331ms 
+[8/1/2022, 06:37:26] [200 - OK] /api/v1/blogs GET 20,479ms 
+[8/1/2022, 06:38:44] [200 - OK] /api/v1/blog/newpage POST 35,245ms 
+[8/1/2022, 06:39:04] [200 - OK] /api/v1/blogs GET 16,297ms 
+[8/1/2022, 06:39:53] [404 - Not Found] /api/v1/blogs/lumajang-gerakan-kerja-bakti GET 2,542ms 
+[8/1/2022, 06:40:10] [200 - OK] /api/v1/blog/lumajang-gerakan-kerja-bakti GET 39,866ms 
+[8/1/2022, 06:54:23] [401 - Unauthorized] /api/v1/blog/4 DELETE 30,861ms 
+[8/1/2022, 06:54:37] [200 - OK] /api/v1/blog/4 DELETE 199,286ms 
+[8/1/2022, 08:56:10] [200 - OK] /api/v1/blogs GET 570,14ms 
+[8/1/2022, 08:56:41] [200 - OK] /api/v1/blog/lumajang-gerakan-kerja-bakti GET 52,906ms 
+[8/1/2022, 08:56:47] [200 - OK] /api/v1/blog/lumajang-gerakan-kerja-baktis GET 7,812ms 
+[8/1/2022, 08:56:52] [200 - OK] /api/v1/blog/lumajang-gerakan-kerja-bakti GET 11,217ms 
+[8/1/2022, 09:46:27] [200 - OK] /api/v1/blogs GET 17,965ms 
+[8/1/2022, 09:49:58] [401 - Unauthorized] /api/v1/blog/2 PUT 9,605ms 
+[8/1/2022, 09:50:05] [200 - OK] /api/v1/auth/login POST 335,722ms 
+[8/1/2022, 09:50:20] [200 - OK] /api/v1/blog/2 PUT 42,421ms 
+[8/1/2022, 09:50:25] [200 - OK] /api/v1/blogs GET 13,801ms 
+[8/1/2022, 09:51:42] [401 - Unauthorized] /api/v1/blog/content/2 PUT 3,289ms 
+[8/1/2022, 09:51:50] [403 - Forbidden] /api/v1/blog/content/2 PUT 124,928ms 
+[8/1/2022, 09:52:00] [501 - Not Implemented] /api/v1/blog/content/2 PUT 30,185ms 
+[8/1/2022, 09:53:24] [403 - Forbidden] /api/v1/blog/content/2 PUT 87,884ms 
+[8/1/2022, 09:54:44] [501 - Not Implemented] /api/v1/blog/content/2 PUT 267,396ms 
+[8/1/2022, 09:56:40] [501 - Not Implemented] /api/v1/blog/content/2 PUT 270,929ms 
+[8/1/2022, 09:57:12] [501 - Not Implemented] /api/v1/blog/content/2 PUT 269,531ms 
+[8/1/2022, 09:58:18] [200 - OK] /api/v1/blog/content/2 PUT 249,573ms 
+[8/1/2022, 09:58:25] [200 - OK] /api/v1/blogs GET 26,999ms 
+[8/1/2022, 10:00:16] [401 - Unauthorized] /api/v1/blog/contenttitle/2 PUT 29,174ms 
+[8/1/2022, 10:00:31] [200 - OK] /api/v1/blog/contenttitle/2 PUT 218,509ms 
+[8/1/2022, 10:00:36] [200 - OK] /api/v1/blogs GET 17,086ms 
+[8/1/2022, 10:06:08] [200 - OK] /api/v1/blogs/highlight GET 206,406ms 
+[8/1/2022, 10:06:20] [200 - OK] /api/v1/blog/newpage POST 152,014ms 
+[8/1/2022, 10:06:28] [200 - OK] /api/v1/blogs GET 11,261ms 
+[8/1/2022, 10:06:40] [200 - OK] /api/v1/blogs/highlight GET 18,515ms 
+[8/1/2022, 10:10:56] [403 - Forbidden] /api/v1/blog/content/2 PUT 105,364ms 
+[8/1/2022, 10:11:17] [200 - OK] /api/v1/blog/content/2 PUT 342,34ms 
+[8/1/2022, 10:11:23] [200 - OK] /api/v1/blogs GET 29,309ms 
+[8/1/2022, 10:11:51] [200 - OK] /api/v1/blog/contenttitle/2 PUT 42,34ms 
+[8/1/2022, 10:12:03] [200 - OK] /api/v1/blogs GET 14,838ms 
+[8/1/2022, 13:32:53] [200 - OK] /api/v1/laporang-kependudukan GET 477,429ms 
+[8/1/2022, 13:37:11] [401 - Unauthorized] /api/v1/laporan-kependudukan/35 PUT 21,7ms 
+[8/1/2022, 13:37:21] [200 - OK] /api/v1/auth/login POST 500,097ms 
+[8/1/2022, 13:37:41] [403 - Forbidden] /api/v1/laporan-kependudukan/35 PUT 155,047ms 
+[8/1/2022, 13:38:43] [200 - OK] /api/v1/laporan-kependudukan/35 PUT 208,816ms 
+[8/1/2022, 13:39:57] [200 - OK] /api/v1/laporan-kependudukan/35 DELETE 101,826ms 
+[8/1/2022, 17:00:16] [401 - Unauthorized] /api/v1/fasilitasi-pertanahan POST 34,768ms 
+[8/1/2022, 17:00:25] [200 - OK] /api/v1/auth/login POST 490,213ms 
+[8/1/2022, 17:00:40] [200 - OK] /api/v1/fasilitasi-pertanahan POST 26,722ms 
+[8/1/2022, 17:00:59] [200 - OK] /api/v1/fasilitasi-pertanahan GET 37,398ms 
+[8/1/2022, 17:01:57] [200 - OK] /api/v1/fasilitasi-pertanahan/1 PUT 30,974ms 
+[8/1/2022, 17:02:02] [200 - OK] /api/v1/fasilitasi-pertanahan GET 13,692ms 
+[8/1/2022, 17:02:18] [200 - OK] /api/v1/fasilitasi-pertanahan POST 20,175ms 
+[8/1/2022, 17:02:23] [200 - OK] /api/v1/fasilitasi-pertanahan GET 11,573ms 
+[8/1/2022, 17:02:30] [200 - OK] /api/v1/fasilitasi-pertanahan GET 12,888ms 
+[8/1/2022, 17:02:39] [200 - OK] /api/v1/fasilitasi-pertanahan/2 DELETE 132,961ms 
+[8/1/2022, 17:02:43] [200 - OK] /api/v1/fasilitasi-pertanahan GET 10,13ms 

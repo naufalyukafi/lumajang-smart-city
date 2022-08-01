@@ -16,8 +16,7 @@ module.exports = (sequelize, DataTypes) => {
   laporan_kependudukan.init({
     RT: DataTypes.INTEGER,
     RW: DataTypes.INTEGER,
-    tanggal_pelaporan: DataTypes.BIGINT,
-    luas_wilayah: DataTypes.INTEGER,
+    luas_wilayah: DataTypes.TEXT,
     batas_utara: DataTypes.TEXT,
     batas_selatan: DataTypes.TEXT,
     batas_barat: DataTypes.TEXT,
