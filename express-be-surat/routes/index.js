@@ -18,6 +18,7 @@ router.put("/auth/:id", auth.verifikasi("admin"), authController.updateUser)
 router.post("/auth/updateprofile", auth.verifikasi("admin"), authController.updateuserinformationdata)
 router.post("/auth/updatepassword", auth.verifikasi("admin"), authController.updatepassworddata)
 router.delete("/auth/:id", auth.verifikasi("admin"), authController.deleteUser)
+router.delete("/auth/verifikasi/:id", auth.verifikasi("admin"), authController.verifikasiUser)
 
 // Saran Pengunjung
 router.post("/saran", aduanController.newMessageFromUser);

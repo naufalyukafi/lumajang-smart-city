@@ -57,3 +57,6 @@
 [8/1/2022, 17:02:30] [200 - OK] /api/v1/fasilitasi-pertanahan GET 12,888ms 
 [8/1/2022, 17:02:39] [200 - OK] /api/v1/fasilitasi-pertanahan/2 DELETE 132,961ms 
 [8/1/2022, 17:02:43] [200 - OK] /api/v1/fasilitasi-pertanahan GET 10,13ms 
+[8/1/2022, 17:50:12] [403 - Forbidden] /api/v1/saran POST 160,595ms 
+[8/1/2022, 17:59:25] [403 - Forbidden] /api/v1/saran POST 15,357ms 
+[8/1/2022, 17:59:40] [403 - Forbidden] /api/v1/saran POST 20,262ms 

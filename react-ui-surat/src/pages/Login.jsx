@@ -1,38 +1,153 @@
-import React from "react";
-import Logo from '../assets/images/img-logo.png'
+import React, { useState } from "react";
+import Logo from '../assets/images/img-login.svg'
+import { useFormik } from "formik";
+import * as yup from "yup";
+import { TextField, Button, IconButton, InputAdornment } from '@mui/material'
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { login } from "../redux/userSlice";
 
 const Login = () => {
+    const user = useSelector((state) => state.user);
+    const dispatch = useDispatch();
+    const [isAuthenticating, setIsAuthenticating] = useState(false);
+    const [showPassword, setShowPassword] = useState(false)
+
+    const formik = useFormik({
+        initialValues: {
+            email: "",
+            password: ""
+        },
+        validationSchema: yup.object({
+            email: yup
+                .string()
+                .min(2, "Email minimal 2 characters")
+                .max(100, "Maximum 100 characters")
+                .required("Email Wajib di isi"),
+            password: yup
+                .string()
+                .min(5, "Password minimal 5 characters")
+                .max(100, "Maximum 100 characters")
+                .required("Password Wajib di isi")
+        }),
+    });
+
+    const onLogin = async () => {
+        if (!isAuthenticating) {
+            setIsAuthenticating(true);
+            //Call
+            await axios.post(
+                `http://localhost:8000/api/v1/auth/login`,
+                {
+                    email: formik.values.email,
+                    password: formik.values.password,
+                },
+                { timeout: 1000 * 45 }
+            ).then(result => {
+                formik.resetForm()
+                setIsAuthenticating(false);
+                if (result.data.code === 200) {
+                    if (result.data.results.statusAkun === "Belum Verifikasi Akun") {
+                        alert("Akun anda belum di verifikasi oleh admin, silahkan hubungi admin!")
+                    } else {
+                        alert(result.data.message)
+                        dispatch(login(result.data.results.payload));
+                    }
+                } else {
+                    alert(result.data.message)
+                }
+            }).catch(err => {
+                formik.resetForm()
+                setIsAuthenticating(false);
+                alert(err)
+            })
+        }
+    }
+
+    console.log(user)
+    if (user?.isAuth) {
+        if (user.value.authorize === "RT") {
+            return console.log('redirect to rt')
+        } else if (user.value.authorize === "RW") {
+            return console.log('redirect to rw')
+        } 
+    }
     return (
         <>
             <div className="grid grid-cols-1 laptop:grid-cols-2 desktop:grid-cols-2 tablet:grid-cols-1 handphone:grid-cols-1 desktop:gap-8">
-
-                <div className="flex items-center justify-center bg-blue-600 p-4 handphone:py-10">
+                <div className="hidden laptop:block text-center bg-zinc-200 p-4 handphone:py-10">
                     <div className="">
-                        <img src={Logo} alt="" className="text=center laptop:h-60 handphone:h-36 mx-auto mb-10" />
-                        <p className="text-white text-xl font-bold">Selamat Datang di Web Admin</p>
+                        <img src={Logo} alt="Lumajang" className="mt-28 laptop:h-60 handphone:h-36 mx-auto mb-10" />
                     </div>
                 </div>
 
                 <div className="flex items-center justify-center rounded-md">
                     <div className="handphone:min-h-fit laptop:min-h-screen flex flex-col laptop:justify-center px-0 w-full handphone:justify-start">
                         <div className="desktop:w-full laptop:w-full">
-                            <h1 className="font-bold text-center text-2xl my-16 handphone:my-12">Masuk ke Akun Anda</h1>
-                            <div className=" w-full rounded-lg divide-y ">
-                                <div className="px-5 py-7">
-                                    {/* Email */}
-                                    <label className="font-semibold text-lg text-gray-600 pb-1 block">E-mail</label>
-                                    <input type="email" className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full" placeholder="Masukkan Email" />
-                                    {/* Password */}
-                                    <label className="font-semibold text-lg text-gray-600 pb-1 block">Password</label>
-                                    <input type="password" className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full" placeholder="Masukkan Password" />
-
-                                    <a href="forgetPassword" className="underline float-right text-lg mt-4">lupa password?</a>
-                                    <button type="button" className="my-6 transition duration-200 bg-blue-500 hover:bg-blue-600 focus:bg-blue-700 focus:shadow-sm focus:ring-4 focus:ring-blue-500 focus:ring-opacity-50 text-white w-full py-2.5 rounded-lg text-sm shadow-sm hover:shadow-md font-semibold text-center inline-block">
-                                        <span className="inline-block mr-2">Masuk</span>
-                                    </button>
-                                    <p className="text-lg font-semibold mt-2 pt-1 mb-0 text-center ">
-                                        Tidak memiliki akun? <a href="#!" className="text-slate-900 hover:text-blue-400 transition duration-200 ease-in-out">Daftar</a>
-                                    </p>
+                            <div className="w-full rounded-lg divide-y ">
+                                <div className="px-5">
+                                    <form
+                                        className="flex flex-col p-5 laptop:p-8 bg-white mt-24 laptop:mt-5 rounded-md shadow"
+                                    >
+                                        <h1 className="font-semibold text-center text-2xl mb-5">Masuk ke Akun Anda</h1>
+                                        <div className="mb-5">
+                                            <TextField
+                                                fullWidth
+                                                autoComplete="on"
+                                                label="Email "
+                                                placeholder="email"
+                                                name="email"
+                                                className='mt-5'
+                                                onChange={formik.handleChange}
+                                                onBlur={formik.handleBlur}
+                                                value={formik.values.email}
+                                                error={formik.touched.email && Boolean(formik.errors.email)}
+                                                helperText={formik.touched.email && formik.errors.email}
+                                            />
+                                        </div>
+                                        <div className="mb-5">
+                                            <TextField
+                                                fullWidth
+                                                autoComplete="on"
+                                                label="Password "
+                                                placeholder="password"
+                                                name="password"
+                                                type={!showPassword ? "password" : "text"}
+                                                onChange={formik.handleChange}
+                                                onBlur={formik.handleBlur}
+                                                value={formik.values.password}
+                                                error={
+                                                    formik.touched.password && Boolean(formik.errors.password)
+                                                }
+                                                helperText={formik.touched.password && formik.errors.password}
+                                                InputProps={{
+                                                    endAdornment: (
+                                                        <InputAdornment position="end">
+                                                            <IconButton
+                                                                aria-label="toggle password visibility"
+                                                                onClick={() => setShowPassword(prev => !prev)}
+                                                                size="large"
+                                                            >
+                                                                {showPassword ? <Visibility /> : <VisibilityOff />}
+                                                            </IconButton>
+                                                        </InputAdornment>
+                                                    ),
+                                                }}
+                                            />
+                                        </div>
+                                        <Button
+                                            onClick={onLogin}
+                                            variant="contained"
+                                            color="primary"
+                                            size="medium"
+                                            className="bg-blue-700 p-3 w-full"
+                                        >Masuk</Button>
+                                        <p className="text-lg font-semibold mt-2 pt-1 mb-0 text-center ">
+                                            Tidak memiliki akun? <a href="#!" className="text-slate-900 hover:text-blue-400 transition duration-200 ease-in-out">Daftar</a>
+                                        </p>
+                                    </form>
                                 </div>
                             </div>
                         </div>
