@@ -17,10 +17,10 @@ const Footer = () => {
                     <div className="p-4 rounded-md items-center md:justify-center">
                         <p className='font-bold uppercase text-center'>Follow Us</p>
                         <div className="flex justify-center m-3">
-                            <a href=""><img src={Twitter} alt="" className='mx-2 w-11 h-11 cursor-pointer' /></a>
-                            <a href=""><img src={Instagram} alt="" className='mx-2 w-11 h-11 cursor-pointer' /></a>
-                            <a href=""><img src={Facebook} alt="" className='mx-2 w-11 h-11 ' /></a>
-                            <a href=""><img src={Youtube} alt="" className='mx-2 w-11 h-11 ' /></a>
+                            <a href="#twitter"><img src={Twitter} alt="" className='mx-2 w-11 h-11 cursor-pointer' /></a>
+                            <a href="#instagram"><img src={Instagram} alt="" className='mx-2 w-11 h-11 cursor-pointer' /></a>
+                            <a href="#facebook"><img src={Facebook} alt="" className='mx-2 w-11 h-11 ' /></a>
+                            <a href="#youtube"><img src={Youtube} alt="" className='mx-2 w-11 h-11 ' /></a>
                         </div>
                     </div>
                     <div className="p-4 rounded-md text-right items-center md:justify-center lg:text-right handphone:text-center md:text-center">
