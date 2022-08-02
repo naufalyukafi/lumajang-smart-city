@@ -8,6 +8,7 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../redux/userSlice";
+import { Navigate } from 'react-router-dom';
 
 const Login = () => {
     const user = useSelector((state) => state.user);
@@ -68,8 +69,8 @@ const Login = () => {
 
     console.log(user)
     if (user?.isAuth) {
-        if (user.value.authorize === "RT") {
-            return console.log('redirect to rt')
+        if (user.value.authorize === "admin") {
+            return <Navigate to="/admin" replace />
         } else if (user.value.authorize === "RW") {
             return console.log('redirect to rw')
         } 

@@ -5,7 +5,7 @@ const CardDetail = () => {
     return (
         <div className="w-full bg-white rounded-lg dark:bg-gray-800">
             <p className='my-4'>24 Juli 2022 | Penulis Andika . Redaktur Anam</p>
-            <a href="#">
+            <a href="/#">
                 <img className="rounded-t-lg object-cover" src={DetailBerita} alt="" />
             </a>
             <div className="p-5">
