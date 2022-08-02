@@ -18,8 +18,8 @@ const createUser = async (req, res) => {
     name: Joi.string().min(3).max(200).required(),
     email: Joi.string().min(3).max(200).required(),
     password: Joi.string().min(6).max(200).required(),
-    picture: Joi.string().allow(null, ""),
     phone: Joi.string().allow(null, ""),
+    role: Joi.number().required(),
   });
 
   const { error } = schema.validate(req.body);
@@ -45,11 +45,11 @@ const createUser = async (req, res) => {
         await user
           .create({
             name: req.body.name,
-            picture: req.body.picture,
             email: req.body.email,
             phone: req.body.phone,
+            status: "Belum Verifikasi Akun",
             password: hash,
-            role: 1,
+            role: req.body.role,
             created_date: Date.now(),
             updated_date: Date.now(),
           })
@@ -69,6 +69,27 @@ const createUser = async (req, res) => {
       return response.internalServerError(error, res);
     });
 };
+
+const verifikasiUser = async (req, res) => {
+  model.User.update(
+    {
+      name: req.body.name,
+      status: req.body.status,
+      email: req.body.email,
+    },
+    {
+      where: {
+        id: req.params.id,
+      },
+    }
+  )
+    .then((result) => {
+      res.json(result);
+    })
+    .catch((error) => {
+      res.json({ error: error });
+    });
+}
 
 const loginUser = async (req, res) => {
   const schema = Joi.object({
@@ -110,6 +131,7 @@ const loginUser = async (req, res) => {
             id: data.id,
             name: data.name,
             email: data.email,
+            status: data.status,
             picture: data.picture,
             phone: data.phone,
             authorize: data.role_name,
@@ -139,6 +161,7 @@ const loginUser = async (req, res) => {
           `Halo ${data.name}, Selamat Datang`,
           {
             payload: token,
+            statusAkun: data.status,
             authorize: data.role_name,
           },
           res
@@ -330,5 +353,6 @@ module.exports = {
   deleteUser,
   readUser,
   updatepassworddata,
-  updateuserinformationdata
+  updateuserinformationdata,
+  verifikasiUser
 };
