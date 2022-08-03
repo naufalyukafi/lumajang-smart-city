@@ -2,15 +2,19 @@ import React from 'react'
 import { IconButton, Button } from "@mui/material"
 import FormatAlignLeftIcon from '@mui/icons-material/FormatAlignLeft';
 import CloseIcon from '@mui/icons-material/Close';
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../redux/userSlice";
 
 const NavbarDashboard = ({ open, setOpen }) => {
     const dispatch = useDispatch()
+    
+    const user = useSelector((state) => state.user);
+
     const onLogout = () => {
         dispatch(logout())
         alert("Akun berhasil keluar")
     }
+
     return (
         <nav className={`bg-white border-b border-gray-200 fixed z-30 w-full`}>
             <div className="px-3 py-3 lg:px-5 lg:pl-3">
@@ -27,7 +31,7 @@ const NavbarDashboard = ({ open, setOpen }) => {
                         </div>
                         <a href="#admin_blank" className="text-xl font-bold flex items-center lg:ml-2.5">
                             <img src="https://demo.themesberg.com/windster/images/logo.svg" className="h-6 mr-2" alt="Windster Logo" />
-                            <span className="self-center whitespace-nowrap">Halo Admin!</span>
+                            <span className="self-center whitespace-nowrap">Halo {user?.value?.name}!</span>
                         </a>
                         <form action="#admin_blank" method="GET" className="hidden lg:block lg:pl-32">
                             <label htmlFor="topbar-search" className="sr-only">Search</label>
