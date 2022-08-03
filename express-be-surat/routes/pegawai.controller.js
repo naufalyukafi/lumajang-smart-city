@@ -85,7 +85,17 @@ exports.newPegawai = async (req, res) => {
 };
 
 exports.getAllPegawai = async (req, res) => {
+    const schema = Joi.object({
+        role: Joi.string().min(2).max(75).required(),
+    });
+
+    const { error } = schema.validate(req.params);
+    if (error) return response.errorParams(error.message, res);
+
+    const role = req.params.role;
+    
     await pegawai.findAll({
+        where: {role_pegawai: role},
         order: [["created_date", "DESC"]],
         raw: true,
     })

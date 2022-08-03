@@ -12,7 +12,7 @@ const LandingPage = () => {
         <Hero />
         <div className="p-8 mx-auto">
             <div className="grid grid-cols-1 desktop:grid-cols-2 laptop:grid-cols-2 gap-4 w-4/5 mx-auto">
-                <div className=" laptop:h-64 grid gap-x-0 rounded-md flex items-start justify-center handphone:grid-cols-1 tablet:grid-cols-2 laptop:grid-cols-2 desktop:grid-cols-2">
+                <div className=" laptop:h-64 grid gap-x-0 rounded-md handphone:grid-cols-1 tablet:grid-cols-2 laptop:grid-cols-2 desktop:grid-cols-2">
                     <Activity />
                     <Activity />
                     <Activity />
