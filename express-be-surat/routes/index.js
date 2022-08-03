@@ -39,7 +39,7 @@ router.put("/penduduk/:nik", auth.verifikasi(["admin", 'rt', 'rw']), pendudukCon
 router.delete("/penduduk/:nik", auth.verifikasi(["admin", 'rt', 'rw']), pendudukController.deletePenduduk);
 
 // Pegawai
-router.get("/pegawai", pegawaiController.getAllPegawai);
+router.get("/pegawai/:role", pegawaiController.getAllPegawai);
 router.post("/pegawai",  auth.verifikasi(["admin", 'rt', 'rw']), pegawaiController.newPegawai);
 router.put("/pegawai/:nik", auth.verifikasi(["admin", 'rt', 'rw']), pegawaiController.updatePegawai);
 router.delete("/pegawai/:nik", auth.verifikasi(["admin", 'rt', 'rw']), pegawaiController.deletePegawai);
