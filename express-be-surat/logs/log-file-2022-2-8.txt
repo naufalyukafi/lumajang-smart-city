@@ -25,3 +25,5 @@
 [8/2/2022, 08:28:29] [200 - OK] /api/v1/auth/login POST 268,896ms 
 [8/2/2022, 08:28:46] [200 - OK] /api/v1/auth/login POST 252,357ms 
 [8/2/2022, 08:29:13] [200 - OK] /api/v1/auth/login POST 514,943ms 
+[8/2/2022, 21:49:25] [200 - OK] /api/v1/auth/login POST 931,733ms 
+[8/2/2022, 22:31:36] [200 - OK] /api/v1/auth/login POST 296,699ms 

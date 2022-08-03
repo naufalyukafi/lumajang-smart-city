@@ -52,6 +52,8 @@ const Login = () => {
                 if (result.data.code === 200) {
                     if (result.data.results.statusAkun === "Belum Verifikasi Akun") {
                         alert("Akun anda belum di verifikasi oleh admin, silahkan hubungi admin!")
+                    } else if(result.data.results.statusAkun === "tolak") {
+                        alert("Mohon maaf akun anda di anggap tidak valid!")
                     } else {
                         alert(result.data.message)
                         dispatch(login(result.data.results.payload));
@@ -67,7 +69,6 @@ const Login = () => {
         }
     }
 
-    console.log(user)
     if (user?.isAuth) {
         if (user.value.authorize === "admin") {
             return <Navigate to="/admin" replace />
