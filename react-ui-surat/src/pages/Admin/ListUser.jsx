@@ -94,8 +94,8 @@ const ListUser = () => {
                 <div className="bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 ">
                     <div className="mb-4">
                         <div>
-                            <h3 className="text-xl font-bold text-gray-900 mb-2">List User</h3>
-                            <span className="text-base font-normal text-gray-500">Berikut merupakan list user yang ada pada website admin</span>
+                            <h3 className="text-xl font-bold text-gray-900 mb-2">List Akun</h3>
+                            <span className="text-base font-normal text-gray-500">Berikut merupakan list akun yang ada pada website admin</span>
                         </div>
                     </div>
                     <div className="flex flex-col mt-8">
