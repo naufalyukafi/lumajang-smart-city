@@ -71,23 +71,21 @@ const createUser = async (req, res) => {
 };
 
 const verifikasiUser = async (req, res) => {
-  model.User.update(
+  const status = req.body.status
+  await user.update(
     {
-      name: req.body.name,
-      status: req.body.status,
-      email: req.body.email,
+      status
     },
     {
       where: {
         id: req.params.id,
       },
     }
-  )
-    .then((result) => {
-      res.json(result);
-    })
+  ).then(async (result) => {
+    return response.successWithCustomMsg(`Akun berhasil di${status === "verifikasi" ? "verifikasi" : "tolak"}!`, result, res);
+  })
     .catch((error) => {
-      res.json({ error: error });
+      return response.internalServerError(error, res);
     });
 }
 
@@ -196,6 +194,19 @@ const readUser = (req, res) => {
       }
     })
     .catch((error) => response.internalServerError(error, res));
+};
+
+const readAllUser = (req, res) => {
+  user.findAll({
+    order: [["created_date", "DESC"]],
+    raw: true,
+  })
+    .then(async (result) => {
+      return response.success(result, res);
+    })
+    .catch((error) => {
+      return response.internalServerError(error, res);
+    });
 };
 
 const updateUser = (req, res) => {
@@ -354,5 +365,6 @@ module.exports = {
   readUser,
   updatepassworddata,
   updateuserinformationdata,
-  verifikasiUser
+  verifikasiUser,
+  readAllUser
 };
