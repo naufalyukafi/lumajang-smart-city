@@ -9,6 +9,9 @@ import ListUser from './ListUser';
 import PengurusRT from './PengurusRT';
 import PengurusRW from './PengurusRw';
 import Satlintas from './Satlintas';
+import TokohAgama from './TokohAgama';
+import TokohMasyarakat from './TokohMasyarakat';
+import PegawaiKelurahan from './PegawaiKelurahan';
 
 const Admin = () => {
     const [open, setOpen] = useState(false);
@@ -24,9 +27,9 @@ const Admin = () => {
                 <Route path="/rt" element={<PengurusRT />} />
                 <Route path="/rw" element={<PengurusRW />} />
                 <Route path="/satlintas" element={<Satlintas />} />
-                <Route path="/tokoh-agama" element={<PengurusRT />} />
-                <Route path="/tokoh-masyarakat" element={<PengurusRT />} />
-                <Route path="/pegawai-kelurahan" element={<PengurusRT />} />
+                <Route path="/tokoh-agama" element={<TokohAgama />} />
+                <Route path="/tokoh-masyarakat" element={<TokohMasyarakat />} />
+                <Route path="/pegawai-kelurahan" element={<PegawaiKelurahan />} />
             </Routes>
             <FooterDashboard />
         </>
