@@ -9,6 +9,7 @@ import ListUser from './ListUser';
 import PengurusRT from './PengurusRT';
 import PengurusRW from './PengurusRw';
 import Satlintas from './Satlintas';
+import PosKamling from './PosKamling';
 
 const Admin = () => {
     const [open, setOpen] = useState(false);
@@ -27,6 +28,7 @@ const Admin = () => {
                 <Route path="/tokoh-agama" element={<PengurusRT />} />
                 <Route path="/tokoh-masyarakat" element={<PengurusRT />} />
                 <Route path="/pegawai-kelurahan" element={<PengurusRT />} />
+                <Route path="/pos-kamling" element={<PosKamling />} />
             </Routes>
             <FooterDashboard />
         </>
