@@ -530,7 +530,7 @@ const PengurusRT = () => {
                                 size='small'
                                 className='mt-5'
                                 onChange={(e) => onInputEditChange(e)}
-                                value={parseInt(rt.phone)}
+                                value={parseInt(rt.nomor_sk)}
                             />
                         </div> <div className="mb-5">
                             <TextField
@@ -542,7 +542,7 @@ const PengurusRT = () => {
                                 size='small'
                                 className='mt-5'
                                 onChange={(e) => onInputEditChange(e)}
-                                value={parseInt(rt.phone)}
+                                value={parseInt(rt.tanggal_sk)}
                             />
                         </div> <div className="mb-5">
                             <TextField
@@ -554,7 +554,7 @@ const PengurusRT = () => {
                                 size='small'
                                 className='mt-5'
                                 onChange={(e) => onInputEditChange(e)}
-                                value={parseInt(rt.phone)}
+                                value={parseInt(rt.tanggal_akhir_sk)}
                             />
                         </div>
                         <div className="mb-5">
