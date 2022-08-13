@@ -512,6 +512,43 @@ const Satlintas = () => {
                             <TextField
                                 fullWidth
                                 autoComplete="on"
+                                label="Nomor_SK "
+                                placeholder="Nomor_SK"
+                                name="nomor_sk"
+                                size='small'
+                                className='mt-5'
+                                onChange={(e) => onInputEditChange(e)}
+                                value={parseInt(satlintas.nomor_sk)}
+                            />
+                        </div> <div className="mb-5">
+                            <TextField
+                                fullWidth
+                                autoComplete="on"
+                                label="Tanggal SK "
+                                placeholder="Tanggal SK"
+                                name="tanggal_sk"
+                                size='small'
+                                className='mt-5'
+                                onChange={(e) => onInputEditChange(e)}
+                                value={parseInt(satlintas.tanggal_sk)}
+                            />
+                        </div> <div className="mb-5">
+                            <TextField
+                                fullWidth
+                                autoComplete="on"
+                                label="Tanggal Akhir SK "
+                                placeholder="Tanggal Akhir SK"
+                                name="tanggal_akhir_sk"
+                                size='small'
+                                className='mt-5'
+                                onChange={(e) => onInputEditChange(e)}
+                                value={parseInt(satlintas.tanggal_akhir_sk)}
+                            />
+                        </div>
+                        <div className="mb-5">
+                            <TextField
+                                fullWidth
+                                autoComplete="on"
                                 label="Keterangan"
                                 placeholder="Keterangan"
                                 name="keterangan"
