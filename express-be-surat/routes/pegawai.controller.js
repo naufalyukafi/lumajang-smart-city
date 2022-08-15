@@ -14,9 +14,6 @@ exports.newPegawai = async (req, res) => {
         tanggal_lahir: Joi.string().min(5).max(250).required().messages({
             "any.required": `"tanggal_lahir" tidak boleh dikosongi`,
         }),
-        alamat: Joi.string().min(3).max(250).required().messages({
-            "any.required": `"alamat" tidak boleh dikosongi`,
-        }),
         jabatan: Joi.string().min(3).max(250).required().messages({
             "any.required": `"alamat" tidak boleh dikosongi`,
         }),
@@ -26,6 +23,7 @@ exports.newPegawai = async (req, res) => {
         phone: Joi.string().min(3).max(14).required().messages({
             "any.required": `"phone" tidak boleh dikosongi`,
         }),
+        alamat: Joi.string().min(3).max(250),
         photo: Joi.string().min(3).max(255),
         RT: Joi.string().min(2).max(255),
         RW: Joi.string().min(2).max(255),
@@ -115,15 +113,13 @@ exports.updatePegawai = async (req, res) => {
         tanggal_lahir: Joi.string().min(5).max(250).required().messages({
             "any.required": `"tanggal_lahir" tidak boleh dikosongi`,
         }),
-        alamat: Joi.string().min(3).max(250).required().messages({
-            "any.required": `"alamat" tidak boleh dikosongi`,
-        }),
         jabatan: Joi.string().min(3).max(250).required().messages({
             "any.required": `"alamat" tidak boleh dikosongi`,
         }),
         phone: Joi.string().min(3).max(14).required().messages({
             "any.required": `"phone" tidak boleh dikosongi`,
         }),
+        alamat: Joi.string().min(3).max(250),
         photo: Joi.string().min(3).max(255),
         RT: Joi.string().min(2).max(255),
         RW: Joi.string().min(2).max(255),

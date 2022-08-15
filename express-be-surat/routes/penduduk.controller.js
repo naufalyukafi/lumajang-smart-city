@@ -98,6 +98,9 @@ exports.updatePenduduk = async (req, res) => {
         nama: Joi.string().min(3).max(250).required().messages({
             "any.required": `"nama" tidak boleh dikosongi`,
         }),
+        tanggal_lahir: Joi.string().min(5).max(250).required().messages({
+            "any.required": `"tanggal_lahir" tidak boleh dikosongi`,
+        }),
         alamat: Joi.string().min(3).max(250).required().messages({
             "any.required": `"alamat" tidak boleh dikosongi`,
         }),
@@ -133,6 +136,7 @@ exports.updatePenduduk = async (req, res) => {
     const phone = req.body.phone;
     const photo = req.body.photo;
     const pendidikan = req.body.pendidikan;
+    const jenis_kelamin = req.body.jenis_kelamin;
     const pekerjaan = req.body.pekerjaan;
     const RT = req.body.RT;
     const RW = req.body.RW;
@@ -141,6 +145,7 @@ exports.updatePenduduk = async (req, res) => {
             nama: nama,
             alamat: alamat,
             tanggal_lahir: tanggal_lahir,
+            jenis_kelamin: jenis_kelamin,
             phone: phone,
             photo: photo,
             pendidikan: pendidikan,
