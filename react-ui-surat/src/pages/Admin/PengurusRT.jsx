@@ -421,19 +421,6 @@ const PengurusRT = () => {
                             <TextField
                                 fullWidth
                                 autoComplete="on"
-                                label="NIK"
-                                placeholder="NIK"
-                                name="nik"
-                                size='small'
-                                className='mt-5'
-                                onChange={(e) => onInputEditChange(e)}
-                                value={rt.nik}
-                            />
-                        </div>
-                        <div className="mb-5">
-                            <TextField
-                                fullWidth
-                                autoComplete="on"
                                 label="Nama"
                                 placeholder="Nama"
                                 name="nama"
@@ -475,7 +462,7 @@ const PengurusRT = () => {
                                 autoComplete="on"
                                 label="RT"
                                 placeholder="RT"
-                                name="rt"
+                                name="RT"
                                 size='small'
                                 className='mt-5'
                                 onChange={(e) => onInputEditChange(e)}
@@ -488,7 +475,7 @@ const PengurusRT = () => {
                                 autoComplete="on"
                                 label="RW"
                                 placeholder="RW"
-                                name="rw"
+                                name="RW"
                                 size='small'
                                 className='mt-5'
                                 onChange={(e) => onInputEditChange(e)}

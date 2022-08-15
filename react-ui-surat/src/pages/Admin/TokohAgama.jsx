@@ -40,9 +40,6 @@ const TokohAgama = () => {
         rw: "",
         jabatan: "",
         phone: "",
-        nomor_sk: "",
-        tanggal_sk: "",
-        tanggal_akhir_sk: "",
         keterangan: "",
         photo: "",
     })
@@ -61,9 +58,6 @@ const TokohAgama = () => {
             rw: "",
             jabatan: "",
             phone: "",
-            nomor_sk: "",
-            tanggal_sk: "",
-            tanggal_akhir_sk: "",
             keterangan: "",
             photo: "",
         },
@@ -106,9 +100,6 @@ const TokohAgama = () => {
             RW: data.RW,
             jabatan: data.jabatan,
             phone: data.phone,
-            nomor_sk: data.nomor_sk,
-            tanggal_sk: data.tanggal_sk,
-            tanggal_akhir_sk: data.tanggal_akhir_sk,
             keterangan: data.keterangan,
             photo: data.photo,
         })
@@ -125,9 +116,6 @@ const TokohAgama = () => {
             rw: data.rw,
             jabatan: data.jabatan,
             phone: data.phone,
-            nomor_sk: data.nomor_sk,
-            tanggal_sk: data.tanggal_sk,
-            tanggal_akhir_sk: data.tanggal_akhir_sk,
             keterangan: data.keterangan,
             photo: data.photo,
         })
@@ -143,9 +131,6 @@ const TokohAgama = () => {
             RW: tokohAgama.rw,
             jabatan: tokohAgama.jabatan,
             phone: tokohAgama.phone,
-            nomor_sk: tokohAgama.nomor_sk.toString(),
-            tanggal_sk: tokohAgama.tanggal_sk.toString(),
-            tanggal_akhir_sk: tokohAgama.tanggal_akhir_sk.toString(),
             keterangan: tokohAgama.keterangan,
             photo: tokohAgama.photo,
         }
@@ -180,9 +165,6 @@ const TokohAgama = () => {
             RW: formik.values.rw,
             jabatan: formik.values.jabatan,
             phone: formik.values.phone,
-            nomor_sk: formik.values.nomor_sk,
-            tanggal_sk: formik.values.tanggal_sk,
-            tanggal_akhir_sk: formik.values.tanggal_akhir_sk,
             keterangan: formik.values.keterangan,
             photo: formik.values.photo,
             role_pegawai: "tokoh-agama",
@@ -409,19 +391,6 @@ const TokohAgama = () => {
                             <TextField
                                 fullWidth
                                 autoComplete="on"
-                                label="NIK"
-                                placeholder="NIK"
-                                name="nik"
-                                size='small'
-                                className='mt-5'
-                                onChange={(e) => onInputEditChange(e)}
-                                value={tokohAgama.nik}
-                            />
-                        </div>
-                        <div className="mb-5">
-                            <TextField
-                                fullWidth
-                                autoComplete="on"
                                 label="Nama"
                                 placeholder="Nama"
                                 name="nama"
@@ -429,19 +398,6 @@ const TokohAgama = () => {
                                 className='mt-5'
                                 onChange={(e) => onInputEditChange(e)}
                                 value={tokohAgama.nama}
-                            />
-                        </div>
-                        <div className="mb-5">
-                            <TextField
-                                fullWidth
-                                autoComplete="on"
-                                label="Alamat"
-                                placeholder="Alamat"
-                                name="alamat"
-                                size='small'
-                                className='mt-5'
-                                onChange={(e) => onInputEditChange(e)}
-                                value={tokohAgama.alamat}
                             />
                         </div>
                         <div className="mb-5">
@@ -461,9 +417,22 @@ const TokohAgama = () => {
                             <TextField
                                 fullWidth
                                 autoComplete="on"
+                                label="Alamat"
+                                placeholder="Alamat"
+                                name="alamat"
+                                size='small'
+                                className='mt-5'
+                                onChange={(e) => onInputEditChange(e)}
+                                value={tokohAgama.alamat}
+                            />
+                        </div>
+                        <div className="mb-5">
+                            <TextField
+                                fullWidth
+                                autoComplete="on"
                                 label="RT"
                                 placeholder="RT"
-                                name="rt"
+                                name="RT"
                                 size='small'
                                 className='mt-5'
                                 onChange={(e) => onInputEditChange(e)}
@@ -476,11 +445,11 @@ const TokohAgama = () => {
                                 autoComplete="on"
                                 label="RW"
                                 placeholder="RW"
-                                name="rw"
+                                name="RW"
                                 size='small'
                                 className='mt-5'
                                 onChange={(e) => onInputEditChange(e)}
-                                value={tokohAgama.RW}
+                                value={parseInt(tokohAgama.RW)}
                             />
                         </div>
                         <div className="mb-5">
@@ -507,43 +476,6 @@ const TokohAgama = () => {
                                 className='mt-5'
                                 onChange={(e) => onInputEditChange(e)}
                                 value={parseInt(tokohAgama.phone)}
-                            />
-                        </div>
-                        <div className="mb-5">
-                            <TextField
-                                fullWidth
-                                autoComplete="on"
-                                label="Nomor_SK "
-                                placeholder="Nomor_SK"
-                                name="nomor_sk"
-                                size='small'
-                                className='mt-5'
-                                onChange={(e) => onInputEditChange(e)}
-                                value={parseInt(tokohAgama.nomor_sk)}
-                            />
-                        </div> <div className="mb-5">
-                            <TextField
-                                fullWidth
-                                autoComplete="on"
-                                label="Tanggal SK "
-                                placeholder="Tanggal SK"
-                                name="tanggal_sk"
-                                size='small'
-                                className='mt-5'
-                                onChange={(e) => onInputEditChange(e)}
-                                value={parseInt(tokohAgama.tanggal_sk)}
-                            />
-                        </div> <div className="mb-5">
-                            <TextField
-                                fullWidth
-                                autoComplete="on"
-                                label="Tanggal Akhir SK "
-                                placeholder="Tanggal Akhir SK"
-                                name="tanggal_akhir_sk"
-                                size='small'
-                                className='mt-5'
-                                onChange={(e) => onInputEditChange(e)}
-                                value={parseInt(tokohAgama.tanggal_akhir_sk)}
                             />
                         </div>
                         <div className="mb-5">
@@ -710,52 +642,6 @@ const TokohAgama = () => {
                                 onBlur={formik.handleBlur}
                                 error={formik.touched.phone && Boolean(formik.errors.phone)}
                                 helperText={formik.touched.phone && formik.errors.phone}
-                            />
-                        </div>
-                        <div className="mb-5">
-                            <TextField
-                                fullWidth
-                                autoComplete="on"
-                                label="Nomor_SK "
-                                placeholder="Nomor_SK"
-                                name="nomor_sk"
-                                size='small'
-                                className='mt-5'
-                                value={formik.values.nomor_sk}
-                                onChange={formik.handleChange}
-                                onBlur={formik.handleBlur}
-                                error={formik.touched.nomor_sk && Boolean(formik.errors.nomor_sk)}
-                                helperText={formik.touched.nomor_sk && formik.errors.nomor_sk}
-                            />
-                        </div> <div className="mb-5">
-                            <TextField
-                                fullWidth
-                                autoComplete="on"
-                                label="Tanggal SK "
-                                placeholder="Tanggal SK"
-                                name="tanggal_sk"
-                                size='small'
-                                className='mt-5'
-                                value={formik.values.tanggal_sk}
-                                onChange={formik.handleChange}
-                                onBlur={formik.handleBlur}
-                                error={formik.touched.tanggal_sk && Boolean(formik.errors.tanggal_sk)}
-                                helperText={formik.touched.tanggal_sk && formik.errors.tanggal_sk}
-                            />
-                        </div> <div className="mb-5">
-                            <TextField
-                                fullWidth
-                                autoComplete="on"
-                                label="Tanggal Akhir SK "
-                                placeholder="Tanggal Akhir SK"
-                                name="tanggal_akhir_sk"
-                                size='small'
-                                className='mt-5'
-                                value={formik.values.tanggal_akhir_sk}
-                                onChange={formik.handleChange}
-                                onBlur={formik.handleBlur}
-                                error={formik.touched.tanggal_akhir_sk && Boolean(formik.errors.tanggal_akhir_sk)}
-                                helperText={formik.touched.tanggal_akhir_sk && formik.errors.tanggal_akhir_sk}
                             />
                         </div>
                         <div className="mb-5">
