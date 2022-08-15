@@ -36,7 +36,6 @@ const PengurusRW = () => {
         nama: "",
         tanggal_lahir: "",
         alamat: "",
-        rt: "",
         rw: "",
         jabatan: "",
         phone: "",
@@ -57,7 +56,6 @@ const PengurusRW = () => {
             nama: "",
             tanggal_lahir: "",
             alamat: "",
-            rt: "",
             rw: "",
             jabatan: "",
             phone: "",
@@ -102,7 +100,6 @@ const PengurusRW = () => {
             nama: data.nama,
             tanggal_lahir: data.tanggal_lahir,
             alamat: data.alamat,
-            RT: data.RT,
             RW: data.RW,
             jabatan: data.jabatan,
             phone: data.phone,
@@ -121,7 +118,6 @@ const PengurusRW = () => {
             nama: data.nama,
             tanggal_lahir: data.tanggal_lahir,
             alamat: data.alamat,
-            rt: data.rt,
             rw: data.rw,
             jabatan: data.jabatan,
             phone: data.phone,
@@ -139,7 +135,6 @@ const PengurusRW = () => {
             nama: rw.nama,
             tanggal_lahir: rw.tanggal_lahir.toString(),
             alamat: rw.alamat,
-            RT: rw.rt,
             RW: rw.rw,
             jabatan: rw.jabatan,
             phone: rw.phone,
@@ -420,19 +415,6 @@ const PengurusRW = () => {
                             <TextField
                                 fullWidth
                                 autoComplete="on"
-                                label="NIK"
-                                placeholder="NIK"
-                                name="nik"
-                                size='small'
-                                className='mt-5'
-                                onChange={(e) => onInputEditChange(e)}
-                                value={rw.nik}
-                            />
-                        </div>
-                        <div className="mb-5">
-                            <TextField
-                                fullWidth
-                                autoComplete="on"
                                 label="Nama"
                                 placeholder="Nama"
                                 name="nama"
@@ -474,7 +456,7 @@ const PengurusRW = () => {
                                 autoComplete="on"
                                 label="RW"
                                 placeholder="RW"
-                                name="rw"
+                                name="RW"
                                 size='small'
                                 className='mt-5'
                                 onChange={(e) => onInputEditChange(e)}
@@ -698,8 +680,8 @@ const PengurusRW = () => {
                             <TextField
                                 fullWidth
                                 autoComplete="on"
-                                label="Nomor_SK "
-                                placeholder="Nomor_SK"
+                                label="Nomor SK "
+                                placeholder="Nomor SK"
                                 name="nomor_sk"
                                 size='small'
                                 className='mt-5'
