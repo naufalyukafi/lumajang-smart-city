@@ -67,7 +67,7 @@ const Register = () => {
         }).catch(err => {
             formik.resetForm()
             setIsProcess(false);
-            alert(err)
+            alert(err.response.data.message)
         })
     };
 

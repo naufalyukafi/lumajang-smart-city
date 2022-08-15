@@ -13,6 +13,7 @@ import ModalDelete from '../../component/ModalDelete';
 import { useFormik } from "formik";
 import * as yup from "yup";
 import Logo from "../../assets/images/img-logo.png"
+import API from "../../utils/host.config";
 
 const eToast = {
     icon: "⚠️",
@@ -151,7 +152,7 @@ const Satlintas = () => {
 
         console.log(dataSaveEdit)
 
-        await axios.put(`http://localhost:8000/api/v1/pegawai/${satlintas?.nik}`, dataSaveEdit, {
+        await axios.put(`${API.HOST}/pegawai/${satlintas?.nik}`, dataSaveEdit, {
             headers: {
                 Authorization: "Bearer " + localStorage.getItem("xtoken"),
             },
@@ -163,8 +164,8 @@ const Satlintas = () => {
                 alert(result.data.message)
             }
         }).catch(err => {
-            console.log(err)
-            alert(err)
+            console.log(err.response.data.message)
+            alert(err.response.data.message)
         })
 
     }
@@ -186,7 +187,7 @@ const Satlintas = () => {
             photo: formik.values.photo,
             role_pegawai: "satlintas",
         }
-        await axios.post(`http://localhost:8000/api/v1/pegawai/`, dataSave, {
+        await axios.post(`${API.HOST}/pegawai/`, dataSave, {
             headers: {
                 Authorization: "Bearer " + localStorage.getItem("xtoken"),
             },
@@ -199,14 +200,14 @@ const Satlintas = () => {
                 alert(result.data.message)
             }
         }).catch(err => {
-            console.log(err)
+            console.log(err.response.data.message)
             formik.resetForm()
-            alert(err)
+            alert(err.response.data.message)
         })
     }
 
     const onDelete = async (id) => {
-        await axios.delete(`http://localhost:8000/api/v1/pegawai/${id}`, {
+        await axios.delete(`${API.HOST}/pegawai/${id}`, {
             headers: {
                 Authorization: "Bearer " + localStorage.getItem("xtoken"),
             },
@@ -218,10 +219,10 @@ const Satlintas = () => {
                 alert(result.data.message)
             }
         }).catch(err => {
-            console.log(err)
+            console.log(err.response.data.message)
             setOpenDeleteModal(false)
             formik.resetForm()
-            alert(err)
+            alert(err.response.data.message)
         })
     }
 
@@ -230,7 +231,7 @@ const Satlintas = () => {
     const handleDeleteModal = () => setOpenDeleteModal(prev => !prev)
 
     const { data: satlintass, error: errorSatlintas } = useSWR(
-        `http://localhost:8000/api/v1/pegawai/satlintas`,
+        `${API.HOST}/pegawai/satlintas`,
         (url) =>
             axios(url, {
                 headers: {

@@ -13,6 +13,7 @@ import TokohAgama from './TokohAgama';
 import TokohMasyarakat from './TokohMasyarakat';
 import PegawaiKelurahan from './PegawaiKelurahan';
 import PosKamling from './PosKamling';
+import Penduduk from './Penduduk';
 
 const Admin = () => {
     const [open, setOpen] = useState(false);
@@ -31,7 +32,8 @@ const Admin = () => {
                 <Route path="/tokoh-agama" element={<TokohAgama />} />
                 <Route path="/tokoh-masyarakat" element={<TokohMasyarakat />} />
                 <Route path="/pegawai-kelurahan" element={<PegawaiKelurahan />} />
-                 <Route path="/pos-kamling" element={<PosKamling />} />
+                <Route path="/pos-kamling" element={<PosKamling />} />
+                <Route path="/penduduk" element={<Penduduk />} />
             </Routes>
             <FooterDashboard />
         </>

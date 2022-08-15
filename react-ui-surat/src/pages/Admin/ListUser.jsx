@@ -7,6 +7,7 @@ import useSWR from 'swr';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 import swal from 'sweetalert';
+import API from "../../utils/host.config";
 
 const eToast = {
     icon: "⚠️",
@@ -31,7 +32,7 @@ const ListUser = () => {
     
     const handleModal = () => setOpenModal(prev => !prev)
     const { data: users, error: errorUsers } = useSWR(
-        `http://localhost:8000/api/v1/auth/users`,
+        `${API.HOST}/auth/users`,
         (url) =>
             axios(url, {
                 headers: {

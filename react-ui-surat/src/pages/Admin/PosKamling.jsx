@@ -13,6 +13,7 @@ import DefaultModal from '../../component/DefaultModal';
 import { useFormik } from "formik";
 import * as yup from "yup";
 import ModalDelete from '../../component/ModalDelete';
+import API from "../../utils/host.config";
 
 const eToast = {
     icon: "⚠️",
@@ -112,7 +113,7 @@ const PosKamling = () => {
             keterangan: pos?.keterangan
         }
 
-        await axios.put(`http://localhost:8000/api/v1/poskamling/${pos?.id}`, dataSaveEdit, {
+        await axios.put(`${API.HOST}/poskamling/${pos?.id}`, dataSaveEdit, {
             headers: {
                 Authorization: "Bearer " + localStorage.getItem("xtoken"),
             },
@@ -124,8 +125,8 @@ const PosKamling = () => {
                 alert(result.data.message)
             }
         }).catch(err => {
-            console.log(err)
-            alert(err)
+            console.log(err.response.data.message)
+            alert(err.response.data.message)
         })
 
     }
@@ -138,7 +139,7 @@ const PosKamling = () => {
             alamat: formik.values.alamat,
             keterangan: formik.values.keterangan
         }
-        await axios.post(`http://localhost:8000/api/v1/poskamling`, dataSave, {
+        await axios.post(`${API.HOST}/poskamling`, dataSave, {
             headers: {
                 Authorization: "Bearer " + localStorage.getItem("xtoken"),
             },
@@ -151,14 +152,14 @@ const PosKamling = () => {
                 alert(result.data.message)
             }
         }).catch(err => {
-            console.log(err)
+            console.log(err.response.data.message)
             formik.resetForm()
-            alert(err)
+            alert(err.response.data.message)
         })
     }
 
     const onDelete = async (id) => {
-        await axios.delete(`http://localhost:8000/api/v1/poskamling/${id}`, {
+        await axios.delete(`${API.HOST}/poskamling/${id}`, {
             headers: {
                 Authorization: "Bearer " + localStorage.getItem("xtoken"),
             },
@@ -170,10 +171,10 @@ const PosKamling = () => {
                 alert(result.data.message)
             }
         }).catch(err => {
-            console.log(err)
+            console.log(err.response.data.message)
             setOpenDeleteModal(false)
             formik.resetForm()
-            alert(err)
+            alert(err.response.data.message)
         })
     }
 
@@ -182,7 +183,7 @@ const PosKamling = () => {
     const handleDeleteModal = () => setOpenDeleteModal(prev => !prev)
 
     const { data: posKamlings, error: errorPosKamlings } = useSWR(
-        `http://localhost:8000/api/v1/poskamling`,
+        `${API.HOST}/poskamling`,
         (url) =>
             axios(url).then((data) => data.data),
         {

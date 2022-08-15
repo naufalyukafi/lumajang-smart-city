@@ -64,7 +64,7 @@ const Login = () => {
             }).catch(err => {
                 formik.resetForm()
                 setIsAuthenticating(false);
-                alert(err)
+                alert(err.response.data.message)
             })
         }
     }
@@ -72,8 +72,8 @@ const Login = () => {
     if (user?.isAuth) {
         if (user.value.authorize === "admin") {
             return <Navigate to="/admin" replace />
-        } else if (user.value.authorize === "RW") {
-            return console.log('redirect to rw')
+        } else if (user.value.authorize === "aduan_masyarakat") {
+            return <Navigate to="/saran-aduan" replace />
         } 
     }
     return (

@@ -7,6 +7,7 @@ import Login from './pages/Login';
 import Register from './pages/Register'
 import Admin from './pages/Admin/index';
 import { ProtectedRoute } from './utils/protected.route';
+import AduanMasyarakat from './pages/AduanMasyarakat';
 
 function App() {
   return (
@@ -20,6 +21,9 @@ function App() {
           <Route path='/register' element={<Register />} />
           <Route element={<ProtectedRoute allowed={["admin"]} />}>
             <Route path='/admin/*' element={<Admin />} />
+          </Route>
+          <Route element={<ProtectedRoute allowed={["aduan_masyarakat"]} />}>
+            <Route path='/saran-aduan/*' element={<AduanMasyarakat />} />
           </Route>
         </Routes>
       </BrowserRouter>
