@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
-import LayoutDashboard from '../../component/LayoutDashboard';
-import EditIcon from '@mui/icons-material/Edit';
-import { IconButton, CircularProgress } from '@mui/material'
-import ModalConfirm from '../../component/ModalConfirm';
+import React from 'react'
+import LayoutDashboard from '../../component/LayoutDashboard'
+import { CircularProgress } from '@mui/material'
 import useSWR from 'swr';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 import swal from 'sweetalert';
 import API from "../../utils/host.config";
+import moment from 'moment';
+import idLocale from "moment/locale/id";
+import { useNavigate } from "react-router-dom"
 
 const eToast = {
     icon: "⚠️",
@@ -21,18 +22,11 @@ const eToast = {
     duration: 5000,
 };
 
-const ListUser = () => {
-    const [openModal, setOpenModal] = useState(false);
-    const [user, setUser] = useState({})
-    
-    const handleOpenModal = (data) => {
-        setUser(data)
-        setOpenModal(true)
-    }
-    
-    const handleModal = () => setOpenModal(prev => !prev)
-    const { data: users, error: errorUsers } = useSWR(
-        `${API.HOST}/auth/users`,
+const ListAduan = () => {
+    const navigate = useNavigate()
+
+    const { data: sarans, error: errorSaran } = useSWR(
+        `${API.HOST}/saran`,
         (url) =>
             axios(url, {
                 headers: {
@@ -63,10 +57,10 @@ const ListUser = () => {
         }
     );
 
-    if (errorUsers) {
+    if (errorSaran) {
         swal({
             title: "Peringatan",
-            text: errorUsers.message,
+            text: errorSaran.message,
             icon: "error",
             closeOnClickOutside: false,
             buttons: {
@@ -79,7 +73,7 @@ const ListUser = () => {
         }).then((value) => {
             switch (value) {
                 case "oke":
-                    if (errorUsers.status === 401) {
+                    if (errorSaran.status === 401) {
                         window.location.reload();
                     }
                     break;
@@ -92,52 +86,46 @@ const ListUser = () => {
     return (
         <LayoutDashboard>
             <div className="w-full grid grid-cols-1 gap-4 min-h-screen">
-                <div className="bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 ">
-                    <div className="mb-4">
+                <div className="bg-white min-w-full shadow rounded-lg p-4 sm:p-6 xl:p-8 ">
+                    <div className="mb-4 flex justify-between items-center">
                         <div>
-                            <h3 className="text-xl font-bold text-gray-900 mb-2">List Akun</h3>
-                            <span className="text-base font-normal text-gray-500">Berikut merupakan list akun yang ada pada website admin</span>
+                            <h3 className="text-xl font-bold text-gray-900 mb-2">List Pegawai Kelurahan</h3>
+                            <span className="text-base font-normal text-gray-500">Berikut merupakan list pegawai Kelurahan</span>
                         </div>
                     </div>
                     <div className="flex flex-col mt-8">
                         <div className="overflow-x-auto rounded-lg">
                             <div className="align-middle inline-block min-w-full">
-                                <div className="shadow overflow-hidden sm:rounded-lg">
                                     <table className="min-w-full divide-y divide-gray-200">
                                         <thead className="bg-gray-50">
                                             <tr>
                                                 <th scope="col" className="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                    Name
+                                                    Pengirim
                                                 </th>
                                                 <th scope="col" className="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                    Email
+                                                    Judul Surat
                                                 </th>
                                                 <th scope="col" className="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                    Status
+                                                    Waktu
                                                 </th>
                                             </tr>
                                         </thead>
                                         <tbody className="bg-white">
-                                            {
-                                                !users ? (
+                                        {
+                                                !sarans ? (
                                                     <tr className="absolute inset-0 flex items-center justify-center">
                                                         <td><CircularProgress /></td>
                                                     </tr>
-                                                ) : users?.results?.map((element, i) => (
-                                                    <tr key={i}>
+                                                ) : sarans?.results?.map((element, i) => (
+                                                    <tr onClick={() => navigate(`/saran-aduan/${element?.id}`)} key={i} className="cursor-pointer hover:border-2">
                                                         <td className="p-4 whitespace-nowrap text-sm font-normal text-gray-900">
-                                                            {element?.name}
+                                                            {element?.nama}
+                                                        </td>
+                                                        <td className="p-4 whitespace-nowrap text-sm font-normal text-gray-500 capitalize">
+                                                            {element?.judul}
                                                         </td>
                                                         <td className="p-4 whitespace-nowrap text-sm font-normal text-gray-500">
-                                                            {element?.email}
-                                                        </td>
-                                                        <td className="p-4 whitespace-nowrap text-sm font-semibold text-gray-900">
-                                                            <div className="flex align-middle items-center">
-                                                                <p>{element?.status}</p>
-                                                                <IconButton onClick={() => handleOpenModal(element)} color="primary" className="bottom-2">
-                                                                    <EditIcon />
-                                                                </IconButton>
-                                                            </div>
+                                                           { moment(element?.updated_date).local("id", idLocale).format("DD MMMM YYYY")}
                                                         </td>
                                                     </tr>
                                                 ))
@@ -145,19 +133,13 @@ const ListUser = () => {
                                         </tbody>
                                     </table>
 
-                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <ModalConfirm
-                    open={openModal}
-                    data={user}
-                    setOpen={handleModal}
-                />
             </div>
         </LayoutDashboard>
     )
 }
 
-export default ListUser
+export default ListAduan

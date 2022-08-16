@@ -425,9 +425,9 @@ const Penduduk = () => {
                     </thead>
                     <tbody className="bg-white">
                       {!penduduks ? (
-                        <div className="absolute inset-0 flex items-center justify-center">
-                          <CircularProgress />
-                        </div>
+                         <tr className="absolute inset-0 flex items-center justify-center">
+                            <td><CircularProgress /></td>
+                        </tr>
                       ) : (
                         penduduks?.results?.map((element, i) => (
                           <tr key={i}>
