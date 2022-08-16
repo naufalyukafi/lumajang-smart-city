@@ -24,6 +24,7 @@ router.post("/auth/verifikasi/:id", auth.verifikasi("admin"), authController.ver
 // Saran Pengunjung
 router.post("/saran", aduanController.newMessageFromUser);
 router.get("/saran", auth.verifikasi(["admin", "aduan_masyarakat"]), aduanController.getAllMessageUser);
+router.get("/saran/:id", auth.verifikasi(["admin", "aduan_masyarakat"]), aduanController.getDetailMessage);
 router.delete("/saran/:id", auth.verifikasi(["admin", "aduan_masyarakat"]), aduanController.deleteMessageUser);
 
 // Pos Kamling

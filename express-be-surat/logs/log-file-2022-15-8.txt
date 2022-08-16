@@ -1,0 +1,105 @@
+[8/15/2022, 19:26:29] [200 - OK] /api/v1/poskamling GET 18,529ms 
+[8/15/2022, 19:26:36] [200 - OK] /api/v1/poskamling GET 10,695ms 
+[8/15/2022, 19:26:55] [200 - OK] /api/v1/pegawai/pegawai-kelurahan GET 17,978ms 
+[8/15/2022, 19:27:03] [200 - OK] /api/v1/pegawai/2132342342342 DELETE 14,862ms 
+[8/15/2022, 19:27:05] [200 - OK] /api/v1/pegawai/pegawai-kelurahan GET 8,098ms 
+[8/15/2022, 19:27:07] [200 - OK] /api/v1/penduduk GET 9,143ms 
+[8/15/2022, 19:27:20] [200 - OK] /api/v1/penduduk/123234234234 DELETE 16,061ms 
+[8/15/2022, 19:27:22] [200 - OK] /api/v1/penduduk GET 8,203ms 
+[8/15/2022, 19:27:30] [200 - OK] /api/v1/penduduk GET 11,368ms 
+[8/15/2022, 19:27:34] [200 - OK] /api/v1/poskamling GET 6,92ms 
+[8/15/2022, 19:27:38] [200 - OK] /api/v1/pegawai/rw GET 8,091ms 
+[8/15/2022, 19:27:46] [200 - OK] /api/v1/pegawai/pegawai-kelurahan GET 9,722ms 
+[8/15/2022, 19:27:48] [200 - OK] /api/v1/pegawai/tokoh-masyarakat GET 14,593ms 
+[8/15/2022, 19:27:49] [200 - OK] /api/v1/pegawai/tokoh-agama GET 10,073ms 
+[8/15/2022, 19:27:52] [200 - OK] /api/v1/pegawai/rt GET 8,789ms 
+[8/15/2022, 19:27:54] [200 - OK] /api/v1/pegawai/satlintas GET 8,681ms 
+[8/15/2022, 19:27:56] [200 - OK] /api/v1/pegawai/rw GET 8,278ms 
+[8/15/2022, 19:27:59] [200 - OK] /api/v1/pegawai/pegawai-kelurahan GET 9,155ms 
+[8/15/2022, 19:28:00] [200 - OK] /api/v1/pegawai/tokoh-masyarakat GET 9,956ms 
+[8/15/2022, 19:28:01] [200 - OK] /api/v1/pegawai/tokoh-agama GET 13,448ms 
+[8/15/2022, 19:28:06] [200 - OK] /api/v1/pegawai/rt GET 16,541ms 
+[8/15/2022, 19:28:07] [200 - OK] /api/v1/auth/users GET 19,44ms 
+[8/15/2022, 19:28:23] [200 - OK] /api/v1/auth/users GET 29,629ms 
+[8/15/2022, 19:28:31] [200 - OK] /api/v1/auth/users GET 13,197ms 
+[8/15/2022, 19:28:45] [200 - OK] /api/v1/auth/users GET 17,864ms 
+[8/15/2022, 19:28:51] [200 - OK] /api/v1/auth/users GET 7,765ms 
+[8/15/2022, 19:29:11] [200 - OK] /api/v1/auth/users GET 12,02ms 
+[8/15/2022, 19:29:15] [200 - OK] /api/v1/auth/users GET 61,25ms 
+[8/15/2022, 19:30:19] [200 - OK] /api/v1/auth/users GET 18,132ms 
+[8/15/2022, 19:32:10] [401 - Unauthorized] /api/v1/auth/users GET 24,741ms 
+[8/15/2022, 19:32:16] [200 - OK] /api/v1/auth/login POST 614,46ms 
+[8/15/2022, 19:32:30] [200 - OK] /api/v1/auth/users GET 51,075ms 
+[8/15/2022, 19:34:14] [200 - OK] /api/v1/auth/users GET 236,707ms 
+[8/15/2022, 19:35:09] [200 - OK] /api/v1/auth/users GET 29,289ms 
+[8/15/2022, 19:36:00] [501 - Not Implemented] /api/v1/auth/users GET 34,43ms 
+[8/15/2022, 19:36:25] [200 - OK] /api/v1/auth/users GET 329,815ms 
+[8/15/2022, 19:37:05] [200 - OK] /api/v1/auth/users GET 527,14ms 
+[8/15/2022, 19:39:25] [501 - Not Implemented] /api/v1/auth/users GET 281,791ms 
+[8/15/2022, 19:40:40] [500 - Internal Server Error] /api/v1/auth/users GET 30,321ms 
+[8/15/2022, 19:40:47] [500 - Internal Server Error] /api/v1/auth/users GET 9,98ms 
+[8/15/2022, 19:41:36] [501 - Not Implemented] /api/v1/auth/users GET 47,115ms 
+[8/15/2022, 20:04:23] [501 - Not Implemented] /api/v1/auth/users GET 11,169ms 
+[8/15/2022, 20:04:28] [200 - OK] /api/v1/penduduk GET 243,104ms 
+[8/15/2022, 20:05:50] [200 - OK] /api/v1/penduduk GET 23,718ms 
+[8/15/2022, 20:05:59] [200 - OK] /api/v1/penduduk GET 29,449ms 
+[8/15/2022, 20:06:05] [200 - OK] /api/v1/poskamling GET 26,113ms 
+[8/15/2022, 20:06:11] [200 - OK] /api/v1/poskamling GET 16,191ms 
+[8/15/2022, 20:09:05] [200 - OK] /api/v1/poskamling GET 28,579ms 
+[8/15/2022, 20:09:11] [200 - OK] /api/v1/penduduk GET 24,996ms 
+[8/15/2022, 20:09:12] [200 - OK] /api/v1/poskamling GET 17,434ms 
+[8/15/2022, 20:09:19] [200 - OK] /api/v1/penduduk GET 24,81ms 
+[8/15/2022, 20:09:22] [200 - OK] /api/v1/pegawai/pegawai-kelurahan GET 29,808ms 
+[8/15/2022, 20:09:36] [200 - OK] /api/v1/pegawai/pegawai-kelurahan GET 25,483ms 
+[8/15/2022, 20:09:44] [200 - OK] /api/v1/pegawai/pegawai-kelurahan GET 11,392ms 
+[8/15/2022, 20:09:52] [200 - OK] /api/v1/pegawai/pegawai-kelurahan GET 18,065ms 
+[8/15/2022, 20:10:37] [200 - OK] /api/v1/pegawai/pegawai-kelurahan GET 17,654ms 
+[8/15/2022, 20:20:39] [200 - OK] /api/v1/pegawai/pegawai-kelurahan GET 29,542ms 
+[8/15/2022, 20:20:55] [200 - OK] /api/v1/pegawai/pegawai-kelurahan GET 18,866ms 
+[8/15/2022, 20:21:16] [200 - OK] /api/v1/pegawai/pegawai-kelurahan GET 18,344ms 
+[8/15/2022, 20:21:34] [200 - OK] /api/v1/pegawai/pegawai-kelurahan GET 25,046ms 
+[8/15/2022, 20:21:46] [200 - OK] /api/v1/pegawai/pegawai-kelurahan GET 21,162ms 
+[8/15/2022, 20:22:13] [200 - OK] /api/v1/pegawai/pegawai-kelurahan GET 14,806ms 
+[8/15/2022, 20:23:35] [200 - OK] /api/v1/pegawai/pegawai-kelurahan GET 15,846ms 
+[8/15/2022, 20:23:37] [200 - OK] /api/v1/pegawai/rw GET 10,905ms 
+[8/15/2022, 20:23:38] [200 - OK] /api/v1/pegawai/satlintas GET 16,45ms 
+[8/15/2022, 20:24:23] [200 - OK] /api/v1/pegawai/satlintas GET 28,766ms 
+[8/15/2022, 20:24:25] [200 - OK] /api/v1/pegawai/tokoh-masyarakat GET 15,705ms 
+[8/15/2022, 20:24:46] [200 - OK] /api/v1/pegawai/tokoh-masyarakat GET 14,711ms 
+[8/15/2022, 20:24:55] [200 - OK] /api/v1/pegawai/tokoh-masyarakat GET 10,71ms 
+[8/15/2022, 20:25:15] [200 - OK] /api/v1/penduduk GET 12,419ms 
+[8/15/2022, 20:25:19] [200 - OK] /api/v1/pegawai/pegawai-kelurahan GET 10,369ms 
+[8/15/2022, 20:25:23] [501 - Not Implemented] /api/v1/auth/users GET 6,96ms 
+[8/15/2022, 20:25:28] [501 - Not Implemented] /api/v1/auth/users GET 10,127ms 
+[8/15/2022, 20:26:02] [501 - Not Implemented] /api/v1/auth/users GET 13,542ms 
+[8/15/2022, 20:26:59] [501 - Not Implemented] /api/v1/auth/users GET 6,874ms 
+[8/15/2022, 20:27:29] [200 - OK] /api/v1/auth/users GET 176,053ms 
+[8/15/2022, 20:27:35] [200 - OK] /api/v1/auth/users GET 15,489ms 
+[8/15/2022, 20:27:36] [200 - OK] /api/v1/poskamling GET 17,84ms 
+[8/15/2022, 20:27:39] [200 - OK] /api/v1/penduduk GET 14,664ms 
+[8/15/2022, 20:27:40] [200 - OK] /api/v1/auth/users GET 10,548ms 
+[8/15/2022, 20:27:44] [200 - OK] /api/v1/auth/users GET 11,96ms 
+[8/15/2022, 20:27:45] [200 - OK] /api/v1/pegawai/rt GET 34,686ms 
+[8/15/2022, 20:27:47] [200 - OK] /api/v1/penduduk GET 12,73ms 
+[8/15/2022, 20:27:48] [200 - OK] /api/v1/poskamling GET 16,012ms 
+[8/15/2022, 20:27:53] [200 - OK] /api/v1/poskamling GET 13,886ms 
+[8/15/2022, 20:28:09] [200 - OK] /api/v1/poskamling GET 23,668ms 
+[8/15/2022, 20:28:32] [200 - OK] /api/v1/poskamling GET 15,589ms 
+[8/15/2022, 20:28:39] [200 - OK] /api/v1/penduduk GET 14,211ms 
+[8/15/2022, 20:28:41] [200 - OK] /api/v1/poskamling GET 11,62ms 
+[8/15/2022, 20:28:45] [200 - OK] /api/v1/penduduk GET 10,938ms 
+[8/15/2022, 20:28:51] [200 - OK] /api/v1/penduduk GET 18,082ms 
+[8/15/2022, 20:28:57] [200 - OK] /api/v1/penduduk GET 13,56ms 
+[8/15/2022, 20:29:03] [200 - OK] /api/v1/penduduk GET 61,532ms 
+[8/15/2022, 20:29:35] [200 - OK] /api/v1/penduduk GET 19,068ms 
+[8/15/2022, 20:29:44] [200 - OK] /api/v1/penduduk GET 7,22ms 
+[8/15/2022, 20:29:52] [200 - OK] /api/v1/penduduk GET 38,934ms 
+[8/15/2022, 20:31:00] [200 - OK] /api/v1/penduduk GET 16,754ms 
+[8/15/2022, 20:31:01] [200 - OK] /api/v1/auth/users GET 25,948ms 
+[8/15/2022, 20:31:22] [200 - OK] /api/v1/auth/users GET 12,977ms 
+[8/15/2022, 20:31:38] [200 - OK] /api/v1/auth/login POST 318,246ms 
+[8/15/2022, 20:36:18] [200 - OK] /api/v1/pegawai/pegawai-kelurahan GET 28,231ms 
+[8/15/2022, 20:36:26] [200 - OK] /api/v1/pegawai/pegawai-kelurahan GET 12,575ms 
+[8/15/2022, 20:36:38] [200 - OK] /api/v1/pegawai/pegawai-kelurahan GET 16,974ms 
+[8/15/2022, 20:37:01] [200 - OK] /api/v1/pegawai/pegawai-kelurahan GET 20,323ms 
+[8/15/2022, 20:37:34] [200 - OK] /api/v1/pegawai/pegawai-kelurahan GET 18,213ms 
