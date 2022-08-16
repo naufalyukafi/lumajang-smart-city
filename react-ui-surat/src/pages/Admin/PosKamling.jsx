@@ -279,9 +279,9 @@ const PosKamling = () => {
                                         <tbody className="bg-white">
                                             {
                                                 !posKamlings ? (
-                                                    <div className="absolute inset-0 flex items-center justify-center">
-                                                        <CircularProgress />
-                                                    </div>
+                                                    <tr className="absolute inset-0 flex items-center justify-center">
+                                                        <td><CircularProgress /></td>
+                                                    </tr>
                                                 ) : posKamlings?.results?.map((element, i) => (
                                                     <tr key={i}>
                                                         <td className="p-4 whitespace-nowrap text-sm font-normal text-gray-500">
