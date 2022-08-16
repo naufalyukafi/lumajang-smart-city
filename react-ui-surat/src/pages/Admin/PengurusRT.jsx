@@ -138,8 +138,8 @@ const PengurusRT = () => {
             nama: rt.nama,
             tanggal_lahir: rt.tanggal_lahir.toString(),
             alamat: rt.alamat,
-            RT: rt.rt,
-            RW: rt.rw,
+            RT: rt.RT.toString(),
+            RW: rt.RW.toString(),
             jabatan: rt.jabatan,
             phone: rt.phone,
             nomor_sk: rt.nomor_sk.toString(),
@@ -505,7 +505,7 @@ const PengurusRT = () => {
                                 size='small'
                                 className='mt-5'
                                 onChange={(e) => onInputEditChange(e)}
-                                value={parseInt(rt.phone)}
+                                value={rt.phone}
                             />
                         </div>
                         <div className="mb-5">
@@ -518,7 +518,7 @@ const PengurusRT = () => {
                                 size='small'
                                 className='mt-5'
                                 onChange={(e) => onInputEditChange(e)}
-                                value={parseInt(rt.nomor_sk)}
+                                value={rt.nomor_sk}
                             />
                         </div> <div className="mb-5">
                             <TextField
@@ -530,7 +530,7 @@ const PengurusRT = () => {
                                 size='small'
                                 className='mt-5'
                                 onChange={(e) => onInputEditChange(e)}
-                                value={parseInt(rt.tanggal_sk)}
+                                value={rt.tanggal_sk}
                             />
                         </div> <div className="mb-5">
                             <TextField
@@ -542,7 +542,7 @@ const PengurusRT = () => {
                                 size='small'
                                 className='mt-5'
                                 onChange={(e) => onInputEditChange(e)}
-                                value={parseInt(rt.tanggal_akhir_sk)}
+                                value={rt.tanggal_akhir_sk}
                             />
                         </div>
                         <div className="mb-5">

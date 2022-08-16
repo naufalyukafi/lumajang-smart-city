@@ -127,8 +127,8 @@ const Satlintas = () => {
             nama: satlintas.nama,
             tanggal_lahir: satlintas.tanggal_lahir.toString(),
             alamat: satlintas.alamat,
-            RT: satlintas.rt,
-            RW: satlintas.rw,
+            RT: satlintas.RT.toString(),
+            RW: satlintas.RW.toString(),
             jabatan: satlintas.jabatan,
             phone: satlintas.phone,
             keterangan: satlintas.keterangan,
@@ -475,7 +475,7 @@ const Satlintas = () => {
                                 size='small'
                                 className='mt-5'
                                 onChange={(e) => onInputEditChange(e)}
-                                value={parseInt(satlintas.phone)}
+                                value={satlintas.phone}
                             />
                         </div>
                         <div className="mb-5">

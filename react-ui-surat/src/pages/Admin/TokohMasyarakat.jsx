@@ -127,8 +127,8 @@ const TokohMasyarakat = () => {
             nama: tokohMasyarakat.nama,
             tanggal_lahir: tokohMasyarakat.tanggal_lahir.toString(),
             alamat: tokohMasyarakat.alamat,
-            RT: tokohMasyarakat.rt,
-            RW: tokohMasyarakat.rw,
+            RT: tokohMasyarakat.RT.toString(),
+            RW: tokohMasyarakat.RW.toString(),
             jabatan: tokohMasyarakat.jabatan,
             phone: tokohMasyarakat.phone,
             keterangan: tokohMasyarakat.keterangan,
@@ -473,7 +473,7 @@ const TokohMasyarakat = () => {
                                 size='small'
                                 className='mt-5'
                                 onChange={(e) => onInputEditChange(e)}
-                                value={parseInt(tokohMasyarakat.phone)}
+                                value={tokohMasyarakat.phone}
                             />
                         </div>
                         <div className="mb-5">
