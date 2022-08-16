@@ -371,7 +371,7 @@ const PegawaiKelurahan = () => {
                                 value={pegawaiKelurahan.tanggal_lahir}
                             />
                         </div>
-                       
+
                         <div className="mb-5">
                             <TextField
                                 fullWidth
@@ -382,7 +382,7 @@ const PegawaiKelurahan = () => {
                                 size='small'
                                 className='mt-5'
                                 onChange={(e) => onInputEditChange(e)}
-                                value={parseInt(pegawaiKelurahan.phone)}
+                                value={pegawaiKelurahan.phone}
                             />
                         </div>
                         <div className="mb-5">
