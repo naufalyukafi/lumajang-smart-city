@@ -92,6 +92,29 @@ exports.getAllMessageUser = async (req, res) => {
         });
 };
 
+exports.getDetailMessage = async (req, res) => {
+    const schema = Joi.object({
+        id: Joi.string().min(1).max(75).required(),
+    });
+
+    const { error } = schema.validate(req.params);
+    if (error) return response.errorParams(error.message, res);
+
+    const id = req.params.id;
+    
+    await saran_aduan.findOne({
+        where: {id: id},
+        raw: true,
+    })
+        .then(async (result) => {
+            return response.success(result, res);
+        })
+        .catch((error) => {
+            return response.internalServerError(error, res);
+        });
+};
+
+
 exports.deleteMessageUser = async (req, res) => {
     const schema = Joi.object({
         id: Joi.number().integer().required().messages({
