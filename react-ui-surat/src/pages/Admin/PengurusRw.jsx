@@ -135,7 +135,7 @@ const PengurusRW = () => {
             nama: rw.nama,
             tanggal_lahir: rw.tanggal_lahir.toString(),
             alamat: rw.alamat,
-            RW: rw.rw,
+            RW: rw.RW.toString(),
             jabatan: rw.jabatan,
             phone: rw.phone,
             nomor_sk: rw.nomor_sk.toString(),
@@ -369,9 +369,9 @@ const PengurusRW = () => {
                                                         <td className="p-4 whitespace-nowrap text-sm font-normal text-gray-500">
                                                             {element?.jabatan}
                                                         </td>
-                                                        {/* <td className="p-4 whitespace-nowrap text-sm font-normal text-gray-500">
-                                                            {element?.nip}
-                                                        </td> */}
+                                                        <td className="p-4 whitespace-nowrap text-sm font-normal text-gray-500">
+                                                            {element?.phone}
+                                                        </td>
                                                         <td className="p-4 whitespace-nowrap text-sm font-normal text-gray-500">
                                                             {element?.nomor_sk}
                                                         </td>
@@ -381,9 +381,7 @@ const PengurusRW = () => {
                                                         <td className="p-4 whitespace-nowrap text-sm font-normal text-gray-500">
                                                             {element?.tanggal_akhir_sk}
                                                         </td>
-                                                        <td className="p-4 whitespace-nowrap text-sm font-normal text-gray-500">
-                                                            {element?.phone}
-                                                        </td>
+
                                                         <td className="p-4 whitespace-nowrap text-sm font-normal text-gray-500">
                                                             {element?.photo.length > 0 ? <img width={100} height={100} src={element?.photo} alt={element?.nama} /> : <img width={50} height={50} src={Logo} alt={element?.nama} />}
                                                         </td>
@@ -486,7 +484,7 @@ const PengurusRW = () => {
                                 size='small'
                                 className='mt-5'
                                 onChange={(e) => onInputEditChange(e)}
-                                value={parseInt(rw.phone)}
+                                value={rw.phone}
                             />
                         </div>
                         <div className="mb-5">
@@ -499,7 +497,7 @@ const PengurusRW = () => {
                                 size='small'
                                 className='mt-5'
                                 onChange={(e) => onInputEditChange(e)}
-                                value={parseInt(rw.nomor_sk)}
+                                value={rw.nomor_sk}
                             />
                         </div> <div className="mb-5">
                             <TextField
@@ -511,7 +509,7 @@ const PengurusRW = () => {
                                 size='small'
                                 className='mt-5'
                                 onChange={(e) => onInputEditChange(e)}
-                                value={parseInt(rw.tanggal_sk)}
+                                value={rw.tanggal_sk}
                             />
                         </div> <div className="mb-5">
                             <TextField
@@ -523,7 +521,7 @@ const PengurusRW = () => {
                                 size='small'
                                 className='mt-5'
                                 onChange={(e) => onInputEditChange(e)}
-                                value={parseInt(rw.tanggal_akhir_sk)}
+                                value={rw.tanggal_akhir_sk}
                             />
                         </div>
                         <div className="mb-5">
