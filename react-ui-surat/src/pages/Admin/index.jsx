@@ -4,6 +4,8 @@ import SidebarAdmin from '../../component/Admin/SidebarAdmin';
 import FooterDashboard from '../../component/FooterDashboard';
 import DashboardAdmin from './DashboardAdmin';
 import { Routes, Route } from 'react-router-dom';
+import { useSelector } from "react-redux";
+import { Navigate } from 'react-router-dom';
 import ExamplePage from './ExamplePage';
 import ListUser from './ListUser';
 import PengurusRT from './PengurusRT';
@@ -17,6 +19,13 @@ import Penduduk from './Penduduk';
 
 const Admin = () => {
     const [open, setOpen] = useState(false);
+    const user = useSelector((state) => state.user);
+    if(user.isAuth === false) {
+        localStorage.clear();
+        <Navigate to="/login" replace />
+    }
+    
+    console.log(user)
     return (
         <>
             <NavbarDashboard open={open} setOpen={setOpen} />

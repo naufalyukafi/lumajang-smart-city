@@ -8,6 +8,7 @@ import Register from './pages/Register'
 import Admin from './pages/Admin/index';
 import { ProtectedRoute } from './utils/protected.route';
 import AduanMasyarakat from './pages/AduanMasyarakat';
+import Kegiaatan from './pages/Kegiatan';
 
 function App() {
   return (
@@ -24,6 +25,9 @@ function App() {
           </Route>
           <Route element={<ProtectedRoute allowed={["aduan_masyarakat"]} />}>
             <Route path='/saran-aduan/*' element={<AduanMasyarakat />} />
+          </Route>
+          <Route element={<ProtectedRoute allowed={["kim_kegiatan"]} />}>
+            <Route path='/kegiatan/*' element={<Kegiaatan />} />
           </Route>
         </Routes>
       </BrowserRouter>

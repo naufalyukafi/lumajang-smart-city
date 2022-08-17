@@ -9,6 +9,7 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../redux/userSlice";
 import { Navigate } from 'react-router-dom';
+import API from "../utils/host.config";
 
 const Login = () => {
     const user = useSelector((state) => state.user);
@@ -40,7 +41,7 @@ const Login = () => {
             setIsAuthenticating(true);
             //Call
             await axios.post(
-                `http://localhost:8000/api/v1/auth/login`,
+                `${API.HOST}/auth/login`,
                 {
                     email: formik.values.email,
                     password: formik.values.password,
@@ -74,7 +75,9 @@ const Login = () => {
             return <Navigate to="/admin" replace />
         } else if (user.value.authorize === "aduan_masyarakat") {
             return <Navigate to="/saran-aduan" replace />
-        } 
+        }  else if(user.value.authorize === "kim_kegiatan") {
+            return <Navigate to="/kegiatan" replace />
+        }
     }
     return (
         <>
@@ -147,7 +150,7 @@ const Login = () => {
                                             className="bg-blue-700 p-3 w-full"
                                         >Masuk</Button>
                                         <p className="text-lg font-semibold mt-2 pt-1 mb-0 text-center ">
-                                            Tidak memiliki akun? <a href="#!" className="text-slate-900 hover:text-blue-400 transition duration-200 ease-in-out">Daftar</a>
+                                            Tidak memiliki akun? <a href="/register" className="text-slate-900 hover:text-blue-400 transition duration-200 ease-in-out">Daftar</a>
                                         </p>
                                     </form>
                                 </div>
