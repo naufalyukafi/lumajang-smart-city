@@ -15,7 +15,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use(logging)
 
 app.use(`/api/v${process.env.API_VERSION}`, require("./routes"));
- 
- 
+app.use(`/api/v${process.env.API_VERSION}/assets/images/gallery/upload`, express.static("assets/images/gallery/upload")); 
 
 app.listen(port, () => console.log(`App listening on port http://localhost:${port}!`));

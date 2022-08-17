@@ -87,7 +87,7 @@ exports.createNewBlog = async (req, res) => {
                 status: status,
                 label_slug: newslug,
                 title: content,
-                content: `{"time":1656379725186,"blocks":[{"id":"LYMDh9fxhj","type":"paragraph","data":{"text":"Tulis disini.."}}],"version":"2.24.3"}`,
+                content: `<p>Tulis disini...</p>`,
                 link_banner: "",
                 view: 0,
                 created_date: Date.now(),
@@ -97,7 +97,7 @@ exports.createNewBlog = async (req, res) => {
         )
             .then(async (result) => {
                 response.successWithCustomMsg(
-                    `Halaman ${content} berhasil`,
+                    `Halaman ${content} berhasil dibuat`,
                     "success",
                     res
                 );
@@ -113,7 +113,6 @@ exports.createNewBlog = async (req, res) => {
 
 exports.updateBlog = async (req, res) => {
     const status = req.body.status;
-    const label_slug = req.body.label_slug;
     const title = req.body.title;
     const content = req.body.content;
     const link_banner = req.body.link_banner;
@@ -122,7 +121,7 @@ exports.updateBlog = async (req, res) => {
         .update(
             {
                 status: status,
-                label_slug: label_slug,
+                label_slug: title.toString().toLowerCase().replace(/\s+/g, "-"),
                 title: title,
                 content: content,
                 link_banner: link_banner,
@@ -136,7 +135,11 @@ exports.updateBlog = async (req, res) => {
             }
         )
         .then(function (result) {
-            return response.success(result, res);
+            return response.successWithCustomMsg(
+                "Konten Berhasil diperbaruhi",
+                result,
+                res
+            );
         })
         .catch(function (error) {
             return response.internalServerError(error, res);
