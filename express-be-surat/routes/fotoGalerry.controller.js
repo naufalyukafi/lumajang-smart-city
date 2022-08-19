@@ -35,7 +35,6 @@ exports.fotoGalleryTBaru = async (req, res) => {
 
 exports.fotoGalleryUpdate = async (req, res) => {
   const schema = Joi.object({
-    id: Joi.number().integer().required(),
     caption: Joi.string().min(2).max(250).required(),
   });
   const { error } = schema.validate(req.body);
