@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Button, CircularProgress, TextField } from "@mui/material";
 import SaveIcon from "@mui/icons-material/Save";
@@ -11,6 +11,7 @@ import toast from "react-hot-toast";
 import swal from "sweetalert";
 import API from "../../../utils/host.config";
 import TextEditor from "../../../component/TextEditor";
+import SwiperFotoGallery from "../../../component/SwipperFotoGallery";
 
 const eToast = {
   icon: "⚠️",
@@ -28,6 +29,7 @@ const DetailBlog = () => {
   const [title, setTitle] = useState("");
   const params = useParams();
   const navigate = useNavigate();
+  const swiperCore = useRef(null);
 
   const { data: blog, error: errorBlog } = useSWR(
     `${API.HOST}/blog/${params.title}`,
@@ -60,7 +62,7 @@ const DetailBlog = () => {
       },
     }
   );
-  
+
   if (errorBlog) {
     swal({
       title: "Peringatan",
@@ -89,9 +91,10 @@ const DetailBlog = () => {
 
   const onUpdateBlog = async (type) => {
     const dataSaveEdit = {
-      status: type === 'publikasi' ? true : false,
+      status: type === "publikasi" ? true : false,
       title: title,
       content: value,
+      link_banner: blog?.results?.listgallery[0].image_url,
     };
 
     await axios
@@ -103,7 +106,7 @@ const DetailBlog = () => {
       .then((result) => {
         if (result.data.code === 200) {
           alert(result.data.message);
-          navigate(-1)
+          navigate(-1);
         } else {
           alert(result.data.message);
         }
@@ -146,12 +149,25 @@ const DetailBlog = () => {
                   className="w-[80%]"
                   onChange={(e) => setTitle(e.target.value)}
                 />
-                <Button onClick={() => onUpdateBlog('simpan')} variant="contained" startIcon={<SaveIcon />}>
+                <Button
+                  onClick={() => onUpdateBlog("simpan")}
+                  variant="contained"
+                  startIcon={<SaveIcon />}
+                >
                   Simpan
                 </Button>
-                <Button onClick={() => onUpdateBlog('publikasi')} variant="contained" startIcon={<SendIcon />}>
+                <Button
+                  onClick={() => onUpdateBlog("publikasi")}
+                  variant="contained"
+                  startIcon={<SendIcon />}
+                >
                   Publikasi
                 </Button>
+              </div>
+              <div className="mt-10">
+                {blog && (
+                  <SwiperFotoGallery data={blog} swiperCore={swiperCore} />
+                )}
               </div>
               <div className="mt-10">
                 <TextEditor value={value} setValue={setValue} />
