@@ -6,6 +6,7 @@ import { TextField, Button, IconButton, InputAdornment, MenuItem } from '@mui/ma
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import axios from "axios";
+import API from "../utils/host.config";
 
 const Register = () => {
     const [isProcess, setIsProcess] = useState(false);
@@ -51,7 +52,7 @@ const Register = () => {
         if (isProcess) return;
         setIsProcess(true);
         axios.post(
-            `http://localhost:8000/api/v1/auth/register`,
+            `${API.HOST}/auth/register`,
             {
                 name: formik.values.name,
                 email: formik.values.email,
@@ -180,6 +181,9 @@ const Register = () => {
                                             size="medium"
                                             className="bg-blue-700 p-3 w-full"
                                         >Daftar</Button>
+                                         <p className="text-lg font-semibold mt-2 pt-1 mb-0 text-center ">
+                                            Sudah memiliki akun? <a href="/login" className="text-slate-900 hover:text-blue-400 transition duration-200 ease-in-out">Login</a>
+                                        </p>
                                     </form>
                                 </div>
                             </div>

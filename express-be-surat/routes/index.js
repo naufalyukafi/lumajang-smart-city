@@ -9,6 +9,8 @@ const pegawaiController = require("./pegawai.controller")
 const blogController = require("./blog.controller")
 const laporanKependudukanController = require("./laporanKependudukan.controller")
 const fasilitasiPertanahanController = require("./fasilitasiPertanahan.controller")
+const fotoGalleryController = require("./fotoGalerry.controller")
+const uploadImages = require("./uploaderImage.controller")
 
 // Auth
 router.post("/auth/login", authController.loginUser)
@@ -46,14 +48,15 @@ router.put("/pegawai/:nik", auth.verifikasi(["admin", 'rt', 'rw']), pegawaiContr
 router.delete("/pegawai/:nik", auth.verifikasi(["admin", 'rt', 'rw']), pegawaiController.deletePegawai);
 
 // Blog
-router.get("/blogs", blogController.getAllBlogs)
+router.get("/blogs", auth.verifikasi("kim_kegiatan"), blogController.getAllBlogs)
+router.get("/user/blogs", blogController.getAllUserBlogs)
 router.get("/blogs/highlight", blogController.getHighlight)
 router.get("/blog/:label_slug", blogController.detailBlog)
-router.put("/blog/content/:id", auth.verifikasi("admin"), blogController.updateBlogContent)
-router.put("/blog/contenttitle/:id", auth.verifikasi("admin"), blogController.updateBlogContentTitle)
-router.put("/blog/:id", auth.verifikasi("admin"), blogController.updateBlog)
-router.post("/blog/newpage", auth.verifikasi("admin"), blogController.createNewBlog)
-router.delete("/blog/:id", auth.verifikasi("admin"), blogController.deleteBlogById)
+router.put("/blog/content/:id", auth.verifikasi("kim_kegiatan"), blogController.updateBlogContent)
+router.put("/blog/contenttitle/:id", auth.verifikasi("kim_kegiatan"), blogController.updateBlogContentTitle)
+router.put("/blog/:id", auth.verifikasi("kim_kegiatan"), blogController.updateBlog)
+router.post("/blog/newpage", auth.verifikasi("kim_kegiatan"), blogController.createNewBlog)
+router.delete("/blog/:id", auth.verifikasi("kim_kegiatan"), blogController.deleteBlogById)
 
 // Laporan Kependudukan
 router.get("/laporan-kependudukan", laporanKependudukanController.getAllLaporanKependudukan);
@@ -66,5 +69,12 @@ router.post("/fasilitasi-pertanahan",  auth.verifikasi(["admin", 'rt', 'rw', "ad
 router.put("/fasilitasi-pertanahan/:id", auth.verifikasi(["admin", 'rt', 'rw', "aduan_masyarakat"]), fasilitasiPertanahanController.updateFasilitasiPertanahan);
 router.delete("/fasilitasi-pertanahan/:id", auth.verifikasi(["admin", 'rt', 'rw', "aduan_masyarakat"]), fasilitasiPertanahanController.deleteFasilitasiPertanahan);
 
+
+// Uploader
+router.post("/uploader/gallery/images", auth.verifikasi(["kim_kegiatan","kim_kegiatan"]), uploadImages.uploadsingleGallery(), fotoGalleryController.fotoGalleryTBaru);
+
+// Foto Gallery
+router.put("/gallery/foto/update/:id", auth.verifikasi("kim_kegiatan"), fotoGalleryController.fotoGalleryUpdate);
+router.delete("/gallery/foto/deleted", auth.verifikasi("kim_kegiatan"), fotoGalleryController.fotoGalleryHapus);
 
 module.exports = router

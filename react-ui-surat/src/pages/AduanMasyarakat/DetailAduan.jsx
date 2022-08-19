@@ -94,7 +94,9 @@ const DetailAduan = () => {
           Kembali
         </Button>
         {!saran ? (
-          <CircularProgress />
+            <div className="absolute inset-0 flex items-center justify-center">
+                <CircularProgress />
+            </div>
         ) : (
           <>
             <div className="bg-white min-h-25v mt-5 border-dashed p-5 w-full border-2 rounded-sm">
