@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import LayoutDashboard from "../../../component/LayoutDashboard";
 import { CircularProgress, Button, TextField, IconButton } from "@mui/material";
-import DeleteIcon from '@mui/icons-material/Delete';
-import useSWR from "swr";
+import DeleteIcon from "@mui/icons-material/Delete";
+import useSWR, { mutate } from "swr";
 import axios from "axios";
 import toast from "react-hot-toast";
 import swal from "sweetalert";
@@ -15,24 +15,13 @@ import DefaultModal from "../../../component/DefaultModal";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import ModalDelete from "../../../component/ModalDelete";
-
-const eToast = {
-  icon: "⚠️",
-  style: {
-    minWidth: "250px",
-    border: "1px solid #FF4C4D",
-    padding: "16px",
-    color: "#000",
-    marginBottom: "25px",
-  },
-  duration: 5000,
-};
+import { eToast, sToast, wToast } from "../../../utils/toastCustom";
 
 const ListBlogs = () => {
   const navigate = useNavigate();
   const [openAddModal, setOpenAddModal] = useState(false);
-  const [openDeleteModal, setOpenDeleteModal] = useState(false)
-  const [blog, setBlog] = useState({})
+  const [openDeleteModal, setOpenDeleteModal] = useState(false);
+  const [blog, setBlog] = useState({});
 
   const handleAddModal = () => setOpenAddModal((prev) => !prev);
   const handleDeleteModal = () => setOpenDeleteModal((prev) => !prev);
@@ -40,10 +29,10 @@ const ListBlogs = () => {
   const handleOpenDeleteModal = (data) => {
     setBlog({
       id: data.id,
-      nama: data.title
-    })
-    setOpenDeleteModal(true)
-  }
+      nama: data.title,
+    });
+    setOpenDeleteModal(true);
+  };
 
   const formik = useFormik({
     initialValues: {
@@ -65,16 +54,12 @@ const ListBlogs = () => {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("xtoken"),
         },
+        timeout: 1000 * 60,
       }).then((data) => data.data),
     {
       refreshWhenOffline: true,
       loadingTimeout: 45000, //slow network (2G, <= 70Kbps) default 3s
-      onLoadingSlow: () => toast.error("Koneksi Anda Buruk", eToast),
-      onSuccess: (data) => {
-        if (data && !data.success) {
-          toast.error(data.message, eToast);
-        }
-      },
+      onLoadingSlow: () => toast.error("Koneksi Anda Buruk", wToast),
       onError: (err) => {
         if (err.code === "ECONNABORTED") {
           toast.error(
@@ -119,49 +104,73 @@ const ListBlogs = () => {
   const onSaveAdd = async () => {
     const dataSave = {
       content: formik.values.content,
-      status: false
+      status: false,
     };
     await axios
       .post(`${API.HOST}/blog/newpage`, dataSave, {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("xtoken"),
         },
+        timeout: 1000 * 60,
       })
       .then((result) => {
         formik.resetForm();
+        setOpenAddModal(false);
         if (result.data.code === 200) {
-          setOpenAddModal(false);
-          alert(result.data.message);
+          toast.success(result.data.message, sToast);
         } else {
-          alert(result.data.message);
+          toast.success(result.data.message, wToast);
         }
       })
       .catch((err) => {
-        console.log(err.response.data.message);
+        setOpenAddModal(false);
         formik.resetForm();
-        alert(err.response.data.message);
+        if (err.code === "ECONNABORTED") {
+          toast.success(
+            "Tidak dapat menjangkau Server, Periksa koneksi anda dan ulangi beberapa saat lagi.",
+            wToast
+          );
+        } else if (err.response) {
+          toast.error(err.response.data.message, eToast);
+        } else {
+          toast.error(err.message, eToast);
+        }
       });
+    mutate(`${API.HOST}/blogs`);
   };
 
   const onDelete = async (id) => {
-    await axios.delete(`${API.HOST}/blog/${id}`, {
+    await axios
+      .delete(`${API.HOST}/blog/${id}`, {
         headers: {
-            Authorization: "Bearer " + localStorage.getItem("xtoken"),
+          Authorization: "Bearer " + localStorage.getItem("xtoken"),
         },
-    }).then(result => {
+        timeout: 1000 * 60,
+      })
+      .then((result) => {
+        setOpenDeleteModal(false);
         if (result.data.code === 200) {
-            setOpenDeleteModal(false)
-            alert(result.data.message)
+          toast.success(result.data.message, sToast);
         } else {
-            alert(result.data.message)
+          toast.success(result.data.message, wToast);
         }
-    }).catch(err => {
-        console.log(err.response.data.message)
-        setOpenDeleteModal(false)
-        formik.resetForm()
-        alert(err.response.data.message)
-    })
-}
+      })
+      .catch((err) => {
+        setOpenDeleteModal(false);
+        formik.resetForm();
+        if (err.code === "ECONNABORTED") {
+          toast.success(
+            "Tidak dapat menjangkau Server, Periksa koneksi anda dan ulangi beberapa saat lagi.",
+            wToast
+          );
+        } else if (err.response) {
+          toast.error(err.response.data.message, eToast);
+        } else {
+          toast.error(err.message, eToast);
+        }
+      });
+    mutate(`${API.HOST}/blogs`);
+  };
 
   return (
     <LayoutDashboard>
@@ -204,8 +213,11 @@ const ListBlogs = () => {
                       >
                         Waktu
                       </th>
-                      <th scope="col" className="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                          Actions
+                      <th
+                        scope="col"
+                        className="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                      >
+                        Actions
                       </th>
                     </tr>
                   </thead>
@@ -218,15 +230,13 @@ const ListBlogs = () => {
                       </tr>
                     ) : (
                       blogs?.results?.map((element, i) => (
-                        <tr
-                          key={i}
-                          className="cursor-pointer hover:border-2"
-                        >
-                          <td 
+                        <tr key={i} className="cursor-pointer hover:border-2">
+                          <td
                             onClick={() =>
                               navigate(`/kegiatan/${element?.label_slug}`)
-                            } 
-                            className="p-4 capitalize whitespace-nowrap text-sm font-normal text-gray-900">
+                            }
+                            className="p-4 capitalize whitespace-nowrap text-sm font-normal text-gray-900"
+                          >
                             {element?.title}{" "}
                             {element.status === 0 && (
                               <span className="text-blue-700">(Draft)</span>
@@ -235,10 +245,14 @@ const ListBlogs = () => {
                           <td className="p-4 whitespace-nowrap text-sm font-normal text-gray-500">
                             {moment(element?.updated_date)
                               .local("id", idLocale)
-                              .format("DD MMMM YYYY")}
+                              .format("hh.mm - DD MMMM YYYY")}
                           </td>
                           <td className="p-4 whitespace-nowrap text-sm font-semibold text-gray-900">
-                            <IconButton onClick={() => handleOpenDeleteModal(element)}><DeleteIcon /></IconButton>
+                            <IconButton
+                              onClick={() => handleOpenDeleteModal(element)}
+                            >
+                              <DeleteIcon />
+                            </IconButton>
                           </td>
                         </tr>
                       ))
@@ -279,10 +293,10 @@ const ListBlogs = () => {
 
       {/* Modal Delete */}
       <ModalDelete
-          data={blog}
-          open={openDeleteModal}
-          setOpen={handleDeleteModal}
-          handleDelete={() => onDelete(blog?.id)}
+        data={blog}
+        open={openDeleteModal}
+        setOpen={handleDeleteModal}
+        handleDelete={() => onDelete(blog?.id)}
       />
     </LayoutDashboard>
   );

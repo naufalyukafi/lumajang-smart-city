@@ -12,18 +12,8 @@ import swal from "sweetalert";
 import API from "../../../utils/host.config";
 import TextEditor from "../../../component/TextEditor";
 import SwiperFotoGallery from "../../../component/SwipperFotoGallery";
+import { eToast, sToast, wToast } from "../../../utils/toastCustom";
 
-const eToast = {
-  icon: "⚠️",
-  style: {
-    minWidth: "250px",
-    border: "1px solid #FF4C4D",
-    padding: "16px",
-    color: "#000",
-    marginBottom: "25px",
-  },
-  duration: 5000,
-};
 const DetailBlog = () => {
   const [value, setValue] = useState("");
   const [title, setTitle] = useState("");
@@ -38,16 +28,12 @@ const DetailBlog = () => {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("xtoken"),
         },
+        timeout: 1000 * 60,
       }).then((data) => data.data),
     {
       refreshWhenOffline: true,
       loadingTimeout: 45000, //slow network (2G, <= 70Kbps) default 3s
       onLoadingSlow: () => toast.error("Koneksi Anda Buruk", eToast),
-      onSuccess: (data) => {
-        if (data && !data.success) {
-          toast.error(data.message, eToast);
-        }
-      },
       onError: (err) => {
         if (err.code === "ECONNABORTED") {
           toast.error(
@@ -94,7 +80,9 @@ const DetailBlog = () => {
       status: type === "publikasi" ? true : false,
       title: title,
       content: value,
-      link_banner: blog?.results?.listgallery[0].image_url,
+      link_banner:
+        blog?.results?.listgallery.length > 0 &&
+        blog?.results?.listgallery[0].image_url,
     };
 
     await axios
@@ -102,18 +90,27 @@ const DetailBlog = () => {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("xtoken"),
         },
+        timeout: 1000 * 60,
       })
       .then((result) => {
         if (result.data.code === 200) {
-          alert(result.data.message);
+          toast.success(result.data.message, sToast);
           navigate(-1);
         } else {
-          alert(result.data.message);
+          toast.success(result.data.message, wToast);
         }
       })
       .catch((err) => {
-        console.log(err.response.data.message);
-        alert(err.response.data.message);
+        if (err.code === "ECONNABORTED") {
+          toast.success(
+            "Tidak dapat menjangkau Server, Periksa koneksi anda dan ulangi beberapa saat lagi.",
+            wToast
+          );
+        } else if (err.response) {
+          toast.error(err.response.data.message, eToast);
+        } else {
+          toast.error(err.message, eToast);
+        }
       });
   };
 

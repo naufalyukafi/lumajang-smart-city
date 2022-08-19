@@ -58,7 +58,7 @@ export default function ModalViewFotoGallery(props) {
 
     setIsLoad(true);
     const reqUpdate = axios.put(
-      `${API.HOST}/gallery/foto/update/${data.id}`,
+      `${API.HOST}/gallery/foto/update/${data.blogId}`,
       {
         id: data.id,
         caption: values.caption,
