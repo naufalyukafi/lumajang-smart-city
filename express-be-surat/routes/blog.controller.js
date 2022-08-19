@@ -17,12 +17,32 @@ exports.getAllBlogs = async (req, res) => {
         });
 };
 
+exports.getAllUserBlogs = async (req, res) => {
+    await blog
+        .findAll({
+            order: [["created_date", "DESC"]],
+            raw: true,
+            where: {
+                status: 1
+            }
+        })
+        .then((result) => {
+            return response.success(result, res);
+        })
+        .catch((error) => {
+            return response.internalServerError(error, res);
+        });
+};
+
 exports.getHighlight = async (req, res) => {
     await blog
         .findAll({
             limit: 3,
             order: [["created_date", "DESC"]],
             raw: true,
+            where: {
+                status: 1
+            }
         })
         .then((result) => {
             return response.success(result, res);

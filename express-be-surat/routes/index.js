@@ -48,7 +48,8 @@ router.put("/pegawai/:nik", auth.verifikasi(["admin", 'rt', 'rw']), pegawaiContr
 router.delete("/pegawai/:nik", auth.verifikasi(["admin", 'rt', 'rw']), pegawaiController.deletePegawai);
 
 // Blog
-router.get("/blogs", blogController.getAllBlogs)
+router.get("/blogs", auth.verifikasi("kim_kegiatan"), blogController.getAllBlogs)
+router.get("/user/blogs", blogController.getAllUserBlogs)
 router.get("/blogs/highlight", blogController.getHighlight)
 router.get("/blog/:label_slug", blogController.detailBlog)
 router.put("/blog/content/:id", auth.verifikasi("kim_kegiatan"), blogController.updateBlogContent)
