@@ -1,4 +1,4 @@
-const { blog, Sequelize, sequelize } = require("../models");
+const { blog, table_foto, Sequelize, sequelize } = require("../models");
 const Joi = require("joi");
 const response = require("../response");
 const sequelizeConf = require("../config/database");
@@ -50,7 +50,18 @@ exports.detailBlog = async (req, res) => {
             type: Sequelize.QueryTypes.SELECT,
         })
         .then(async (result) => {
-            return response.success({ ...result[0] }, res)
+            if(result) {
+                await table_foto
+                .findAll({
+                    where: { blog_id: result[0].idBlog },
+                })
+                .then((data) => {
+                    return response.success({ ...result[0], listgallery: data }, res);
+                })
+                .catch((error) => response.internalServerError(error, res));
+            } else {
+                return response.successWithErrorMsg("Data tidak ditemukan", res);
+            }
         })
         .catch((error) => {
             return response.internalServerError(error, res);
