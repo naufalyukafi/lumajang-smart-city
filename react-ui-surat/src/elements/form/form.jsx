@@ -1,49 +1,155 @@
 import React, { useState } from "react";
 import axios from 'axios'
+import { Button, TextField } from '@mui/material'
+import { useFormik } from "formik";
+import * as yup from "yup";
+import useSWR from 'swr';
+import toast from 'react-hot-toast';
+import swal from 'sweetalert';
+import API from "../../utils/host.config";
+
+
+const eToast = {
+    icon: "⚠️",
+    style: {
+        minWidth: "250px",
+        border: "1px solid #FF4C4D",
+        padding: "16px",
+        color: "#000",
+        marginBottom: "25px",
+    },
+    duration: 5000,
+};
 
 const Form = () => {
-    const [name, setName] = useState("")
-    const [email, setEmail] = useState("")
-    const [phone, setPhone] = useState("")
-    const [photo, setPhoto] = useState("")
-    const [identitas, setIdentitas] = useState("")
-    const [pekerjaan, setPekerjaan] = useState("")
-    const [status_kependudukan, setStatusKependudukan] = useState("")
-    const [alamat, setAlamat] = useState("")
-    const [judul, setJudul] = useState("")
-    const [status, setStatus] = useState("")
-    const [message, setMessage] = useState("")
+    const [pengaduanMasyarakat, setPengaduanMasyarakat] = useState({
+        nama: "",
+        status_kependudukan: "",
+        identitas: "",
+        alamat: "",
+        pekerjaan: "",
+        email: "",
+        phone: "",
+        judul: "",
+        message: "",
+        status: ""
+    })
 
-    const onChangeHandlerName = (e) => setName(e.target.value)
-    const onChangeHandlerEmail = (e) => setEmail(e.target.value)
-    const onChangeHandlerPhone = (e) => setPhone(e.target.value)
-    const onChangeHandlerPhoto = (e) => setPhoto(e.target.value)
-    const onChangeHandlerIdentitas = (e) => setIdentitas(e.target.value)
-    const onChangeHandlerPekerjaan = (e) => setPekerjaan(e.target.value)
-    const onChangeHandlerStatusKependudukan = (e) => setStatusKependudukan(e.target.value)
-    const onChangeHandlerAlamat = (e) => setAlamat(e.target.value)
-    const onChangeHandlerJudul = (e) => setJudul(e.target.value)
-    const onChangeHandlerStatus = (e) => setStatus(e.target.value)
-    const onChangeHandlerMessage = (e) => setMessage(e.target.value)
+    const formik = useFormik({
+        initialValues: {
+            nama: "",
+            status_kependudukan: "",
+            identitas: "",
+            alamat: "",
+            pekerjaan: "",
+            email: "",
+            phone: "",
+            judul: "",
+            message: "",
+            status: ""
+        },
+        validationSchema: yup.object({
+            nama: yup
+                .string()
+                .min(2, "Nama minimal 2 characters")
+                .max(100, "Maximum 100 characters")
+                .required("Nama Wajib di isi"),
+            phone: yup
+                .string()
+                .min(8, "Phone minimal 8 characters")
+                .max(100, "Maximum 100 characters")
+                .required("Phone Wajib di isi"),
+        }),
+    })
 
-    const onSubmit = async () => {
-        await axios.post('http://localhost:8000/api/v1/saran', {
-            name,
-            email,
-            phone,
-            photo,
-            identitas,
-            pekerjaan,
-            status_kependudukan,
-            alamat,
-            judul,
-            status,
-            message,
-        }).then(() => {
-            console.log('success')
+    const onSaveAdd = async () => {
+        const dataSave = {
+            nama: formik.values.nama,
+            status_kependudukan: formik.values.status_kependudukan,
+            identitas: formik.values.identitas,
+            alamat: formik.values.alamat,
+            pekerjaan: formik.values.pekerjaan,
+            email: formik.values.nemailame,
+            phone: formik.values.phone,
+            judul: formik.values.judul,
+            message: formik.values.message,
+            status: formik.values.status,
+        }
+        await axios.post(`${API.HOST}/v1/saran`, dataSave, {
+            headers: {
+                Authorization: "Bearer " + localStorage.getItem("xtoken"),
+            },
+        }).then(result => {
+            formik.resetForm()
+            if (result.data.code === 200) {
+                // setOpenAddModal(false)
+                alert(result.data.message)
+            } else {
+                alert(result.data.message)
+            }
         }).catch(err => {
-            console.log(err)
+            console.log(err.response.data.message)
+            formik.resetForm()
+            alert(err.response.data.message)
         })
+    }
+
+    const { data: pengaduanMasyarakats, error: errorPengaduanMasyarakat } = useSWR(
+        `${API.HOST}/pegawai/pegawai-kelurahan`,
+        (url) =>
+            axios(url, {
+                headers: {
+                    Authorization: "Bearer " + localStorage.getItem("xtoken"),
+                },
+            }).then((data) => data.data),
+        {
+            refreshWhenOffline: true,
+            loadingTimeout: 45000, //slow network (2G, <= 70Kbps) default 3s
+            onLoadingSlow: () => toast.error("Koneksi Anda Buruk", eToast),
+            onSuccess: (data) => {
+                if (data && !data.success) {
+                    toast.error(data.message, eToast);
+                }
+            },
+            onError: (err) => {
+                if (err.code === "ECONNABORTED") {
+                    toast.error(
+                        "Tidak dapat menjangkau Server, Periksa koneksi anda dan ulangi beberapa saat lagi.",
+                        eToast
+                    );
+                } else if (err.response) {
+                    toast.error(err.data.message, eToast);
+                } else {
+                    toast.error(err.message, eToast);
+                }
+            },
+        }
+    );
+
+    if (errorPengaduanMasyarakat) {
+        swal({
+            title: "Peringatan",
+            text: errorPengaduanMasyarakat.message,
+            icon: "error",
+            closeOnClickOutside: false,
+            buttons: {
+                catch: {
+                    text: "Tutup",
+                    value: "oke",
+                    className: "mx-auto",
+                },
+            },
+        }).then((value) => {
+            switch (value) {
+                case "oke":
+                    if (errorPengaduanMasyarakat.status === 401) {
+                        window.location.reload();
+                    }
+                    break;
+                default:
+                    return;
+            }
+        });
     }
 
     return (
@@ -51,92 +157,208 @@ const Form = () => {
             <form className="w-full content-start">
                 <p className="font-bold uppercase text-center  py-2 px-4 rounded mb-4">Pengaduan Masyarakat</p>
                 <div className="py-2 px-6 mx-auto">
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-1 lg:gap-1">
-                        <div className="rounded-md flex items-center">
-                            Nama Pelapor
-                        </div>
-                        <div className="rounded-md flex items-center justify-center">
-                            <input value={name} onChange={(e) => onChangeHandlerName(e)} className="w-full shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="Nama" />
-                        </div>
+                    <div className="rounded-md flex items-center mb-3">
+                        Nama Pelapor
                     </div>
+                    <TextField
+                        fullWidth
+                        autoComplete="on"
+                        placeholder="Nama"
+                        name="nama"
+                        size='small'
+                        className='rounded-md flex items-center'
+                        value={formik.values.nama}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        error={formik.touched.nama && Boolean(formik.errors.nama)}
+                        helperText={formik.touched.nama && formik.errors.nama}
+                    />
                 </div>
                 <div className="py-2 px-6 mx-auto">
-                    <label htmlFor="warga" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">Status Kependudukan</label>
-                    <select id="warga" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                        <option value={status_kependudukan} onChange={(e) => onChangeHandlerStatusKependudukan(e)}>Warga Ditotrunan</option>
-                        <option value={status_kependudukan} onChange={(e) => onChangeHandlerStatusKependudukan(e)}>Bukan Warga Ditrotunan</option>
-                    </select>
-                </div>
-                <div className="py-2 px-6 mx-auto">
-                    <label htmlFor="identitas" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">Identitias</label>
-                    <select id="identitas" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                        <option value={identitas} onChange={(e) => onChangeHandlerIdentitas(e)}>KTP</option>
-                        <option value={identitas} onChange={(e) => onChangeHandlerIdentitas(e)}>KK</option>
-                        <option value={identitas} onChange={(e) => onChangeHandlerIdentitas(e)}>Pasport</option>
-                    </select>
-                </div>
-                <div className="py-2 px-6 mx-auto">
-
-                    <label htmlFor="message" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">Alamat</label>
-                    <textarea value={alamat} onChange={(e) => onChangeHandlerAlamat(e)} id="message" rows="4" className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Your message..."></textarea>
-
-                </div>
-                <div className="py-2 px-6 mx-auto">
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-1 lg:gap-1">
-                        <div className="rounded-md flex items-center">
-                            Pekerjaan
-                        </div>
-                        <div className="rounded-md flex items-center justify-center">
-                            <input value={pekerjaan} onChange={(e) => onChangeHandlerPekerjaan(e)} className="w-full shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="Pekerjaan" />
-                        </div>
+                    <div className="rounded-md flex items-center mb-3">
+                        Status Kependudukan
                     </div>
+                    <TextField
+                        fullWidth
+                        autoComplete="on"
+                        placeholder="Status Kependudukan"
+                        name="status_kependudukan"
+                        size='small'
+                        className='rounded-md flex items-center'
+                        value={formik.values.status_kependudukan}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        error={formik.touched.status_kependudukan && Boolean(formik.errors.status_kependudukan)}
+                        helperText={formik.touched.status_kependudukan && formik.errors.status_kependudukan}
+                    />
                 </div>
                 <div className="py-2 px-6 mx-auto">
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-1 lg:gap-1">
-                        <div className="rounded-md flex items-center">
-                            Email
-                        </div>
-                        <div className="rounded-md flex items-center justify-center">
-                            <input value={email} onChange={(e) => onChangeHandlerEmail(e)} className="w-full shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="email" placeholder="Email" />
-                        </div>
+                    <div className="rounded-md flex items-center mb-3">
+                        Identitas
                     </div>
+                    <TextField
+                        fullWidth
+                        autoComplete="on"
+                        placeholder="Identitas"
+                        name="identitas"
+                        size='small'
+                        className='rounded-md flex items-center'
+                        value={formik.values.identitas}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        error={formik.touched.identitas && Boolean(formik.errors.identitas)}
+                        helperText={formik.touched.identitas && formik.errors.identitas}
+                    />
                 </div>
                 <div className="py-2 px-6 mx-auto">
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-1 lg:gap-1">
-                        <div className="rounded-md flex items-center">
-                            Phone
-                        </div>
-                        <div className="rounded-md flex items-center justify-center">
-                            <input value={phone} onChange={(e) => onChangeHandlerPhone(e)} className="w-full shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="number" placeholder="Phone" />
-                        </div>
+                    <div className="rounded-md flex items-center mb-3">
+                        Alamat
                     </div>
+                    <TextField
+                        fullWidth
+                        autoComplete="on"
+                        placeholder="Isi Alamat Anda"
+                        name="alamat"
+                        size='small'
+                        className='rounded-md flex items-center'
+                        multiline
+                        rows={4}
+                        value={formik.values.alamat}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        error={formik.touched.alamat && Boolean(formik.errors.alamat)}
+                        helperText={formik.touched.alamat && formik.errors.alamat}
+                    />
                 </div>
                 <div className="py-2 px-6 mx-auto">
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-1 lg:gap-1">
-                        <div className="rounded-md flex items-center">
-                            Judul
-                        </div>
-                        <div className="rounded-md flex items-center justify-center">
-                            <input value={judul} onChange={(e) => onChangeHandlerJudul(e)} className="w-full shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="Isi Judul Keluhan" />
-                        </div>
+                    <div className="rounded-md flex items-center mb-3">
+                        Pekerjaan
                     </div>
+                    <TextField
+                        fullWidth
+                        autoComplete="on"
+                        placeholder="Pekerjaan"
+                        name="pekerjaan"
+                        size='small'
+                        className='rounded-md flex items-center'
+                        value={formik.values.pekerjaan}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        error={formik.touched.pekerjaan && Boolean(formik.errors.pekerjaan)}
+                        helperText={formik.touched.pekerjaan && formik.errors.pekerjaan}
+                    />
                 </div>
                 <div className="py-2 px-6 mx-auto">
-                    <label htmlFor="message" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">Pesan</label>
-                    <textarea value={message} onChange={(e) => onChangeHandlerMessage(e)} id="message" rows="4" className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Your message..."></textarea>
+                    <div className="rounded-md flex items-center mb-3">
+                        Email
+                    </div>
+                    <TextField
+                        fullWidth
+                        autoComplete="on"
+                        placeholder="Email"
+                        name="email"
+                        size='small'
+                        className='rounded-md flex items-center'
+                        value={formik.values.email}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        error={formik.touched.email && Boolean(formik.errors.email)}
+                        helperText={formik.touched.email && formik.errors.email}
+                    />
                 </div>
                 <div className="py-2 px-6 mx-auto">
-                    <label htmlFor="formFile" className="form-label inline-block mb-2 text-gray-700">Foto</label>
-                    <input value={photo} onChange={(e) => onChangeHandlerPhoto(e)} className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" type="file" id="formFile" />
+                    <div className="rounded-md flex items-center mb-3">
+                        Phone
+                    </div>
+                    <TextField
+                        fullWidth
+                        autoComplete="on"
+                        placeholder="Phone"
+                        name="phone"
+                        size='small'
+                        className='rounded-md flex items-center'
+                        value={formik.values.phone}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        error={formik.touched.phone && Boolean(formik.errors.phone)}
+                        helperText={formik.touched.phone && formik.errors.phone}
+                    />
                 </div>
                 <div className="py-2 px-6 mx-auto">
-                    <label htmlFor="status" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">Status</label>
-                    <select id="status" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                        <option value={status} onChange={(e) => onChangeHandlerStatus(e)}>Dirahasiakan</option>
-                        <option value={status} onChange={(e) => onChangeHandlerStatus(e)}>Tidak Dirahasiakan</option>
-                    </select>
+                    <div className="rounded-md flex items-center mb-3">
+                        Judul
+                    </div>
+                    <TextField
+                        fullWidth
+                        autoComplete="on"
+                        placeholder="Judul"
+                        name="judul"
+                        size='small'
+                        className='rounded-md flex items-center'
+                        value={formik.values.judul}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        error={formik.touched.judul && Boolean(formik.errors.judul)}
+                        helperText={formik.touched.judul && formik.errors.judul}
+                    />
                 </div>
-                <button onClick={onSubmit} type="submit" className="lg:mr-6 md:mr-6 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 laptop:float-right">Submit</button>
+                <div className="py-2 px-6 mx-auto">
+                    <div className="rounded-md flex items-center mb-3">
+                        Message
+                    </div>
+                    <TextField
+                        fullWidth
+                        autoComplete="on"
+                        placeholder="Isi Message Anda"
+                        name="message"
+                        size='small'
+                        className='rounded-md flex items-center'
+                        multiline
+                        rows={4}
+                        value={formik.values.message}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        error={formik.touched.message && Boolean(formik.errors.message)}
+                        helperText={formik.touched.message && formik.errors.message}
+                    />
+                </div>
+                <div className="py-2 px-6 mx-auto">
+                    <div className="rounded-md flex items-center mb-3">
+                        Photo
+                    </div>
+                    <TextField
+                        fullWidth
+                        autoComplete="on"
+                        placeholder="Photo"
+                        name="photo"
+                        size='small'
+                        className='rounded-md flex items-center'
+                        value={formik.values.photo}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        error={formik.touched.photo && Boolean(formik.errors.photo)}
+                        helperText={formik.touched.photo && formik.errors.photo}
+                    />
+                </div>
+                <div className="py-2 px-6 mx-auto">
+                    <div className="rounded-md flex items-center mb-3">
+                        Status
+                    </div>
+                    <TextField
+                        fullWidth
+                        autoComplete="on"
+                        placeholder="Status"
+                        name="status"
+                        size='small'
+                        className='rounded-md flex items-center'
+                        value={formik.values.status}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        error={formik.touched.status && Boolean(formik.errors.status)}
+                        helperText={formik.touched.status && formik.errors.status}
+                    />
+                </div>
+                <Button onSubmit={onSaveAdd} type="submit" variant="contained">Submit</Button>
             </form>
         </>
     )
