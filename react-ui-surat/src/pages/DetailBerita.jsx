@@ -140,16 +140,16 @@ const DetailBerita = () => {
       <div className="flex flex-col items-start justify-center desktop:flex-row laptop:flex-col" data-aos="fade-down">
 
         <div className="desktop:m-2 tablet:m-2 handphone:mx-auto handphone:my-3 w-[90%] desktop:w-[50%]">
-          <p className="max-w-6xl capitalize mx-auto font-bold desktop:text-3xl handphone:text-xl">
+          <p className="max-w-6xl capitalize mx-auto font-bold desktop:text-3xl handphone:text-xl laptop:ml-[1.9rem]">
             {blog?.results?.title}
           </p>
           <CardDetail data={blog} />
         </div>
 
-        <div className="desktop:m-2 tablet:m-2 handphone:mx-auto desktop:w-3/12 handphone:w-[90%] tablet:w-[90%]">
+        <div className="desktop:m-2 tablet:m-2 handphone:mx-auto desktop:w-3/12 handphone:w-[90%] tablet:w-[90%] laptop:pl-6">
 
           {/* <div className="grid grid-cols-1 md:grid-cols-2"></div> */}
-          <p className="laptop:mb-14 tablet:mb-3 handphone:mb-2 text-2xl font-medium">Berita Lainnya</p>
+          <p className="laptop:mb-[3.7rem] tablet:mb-3 handphone:mb-2 text-2xl font-medium">Berita Lainnya</p>
           {!highlight ? (
             <div className="absolute inset-0 flex items-center justify-center">
               <CircularProgress />
