@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import CardDetail from "../component/CardDetail";
 import NavbarMenu from "../component/NavbarMenu";
 import Footer from "../component/Footer";
@@ -11,8 +11,16 @@ import API from "../utils/host.config";
 import { eToast, wToast } from "../utils/toastCustom";
 import { useParams } from "react-router-dom";
 import { CircularProgress } from "@mui/material";
+import AOS from 'aos'
 
 const DetailBerita = () => {
+  useEffect(() => {
+    AOS.init({
+      duration: 2000
+    })
+    AOS.refresh()
+  }, []);
+
   const params = useParams();
   const { data: blog, error: errorBlog } = useSWR(
     `${API.HOST}/blog/${params.slug}`,
@@ -123,19 +131,25 @@ const DetailBerita = () => {
   }
 
   return (
-    <div>
+    //     <div class="flex flex-col lg:flex-row justify-center items-start bg-cyan-200">
+    //   <div class="w-80 bg-amber-400 border-lime-300 m-3">01</div>
+    //   <div class="basis-1/4 bg-amber-400 m-3">02</div>
+    // </div>
+    <>
       <NavbarMenu />
-      <p className="max-w-6xl capitalize mx-auto font-bold desktop:text-3xl mt-4 handphone:text-xl">
-        {blog?.results?.title}
-      </p>
-      <div className="max-w-6xl mx-auto grid grid-cols-1 handphone:grid-cols-1 laptop:grid-cols-2 gap-1 handphone:mb-5">
-        <div className="w-10/12 rounded-md handphone:mb-5 laptop:w-[850px]">
-          <div className="self-start handphone:mb-5">
-            <CardDetail data={blog} />
-          </div>
+      <div className="flex flex-col items-start justify-center desktop:flex-row laptop:flex-col" data-aos="fade-down">
+
+        <div className="desktop:m-2 tablet:m-2 handphone:mx-auto handphone:my-3 w-[90%] desktop:w-[50%]">
+          <p className="max-w-6xl capitalize mx-auto font-bold desktop:text-3xl handphone:text-xl">
+            {blog?.results?.title}
+          </p>
+          <CardDetail data={blog} />
         </div>
-        <div className="w-full laptop:w-64 rounded-md flex-col items-center laptop:justify-self-end laptop:justify-center handphone:justify-self-center">
-          <p className="my-3 text-2xl font-medium">Berita Lainnya</p>
+
+        <div className="desktop:m-2 tablet:m-2 handphone:mx-auto desktop:w-3/12 handphone:w-[90%] tablet:w-[90%]">
+
+          {/* <div className="grid grid-cols-1 md:grid-cols-2"></div> */}
+          <p className="laptop:mb-14 tablet:mb-3 handphone:mb-2 text-2xl font-medium">Berita Lainnya</p>
           {!highlight ? (
             <div className="absolute inset-0 flex items-center justify-center">
               <CircularProgress />
@@ -157,9 +171,10 @@ const DetailBerita = () => {
             <Card />
           </div> */}
         </div>
+
       </div>
       <Footer />
-    </div>
+    </>
   );
 };
 

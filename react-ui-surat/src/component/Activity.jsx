@@ -5,9 +5,9 @@ const Activity = ({ data }) => {
   return (
     <div className="p-4">
       <Link to={`/detail/${data.label_slug}`}>
-        <div className="h-full shadow-md hover:shadow-xl rounded-lg overflow-hidden cursor-pointer">
+        <div className="h-full shadow-md hover:shadow-xl rounded-lg overflow-hidden cursor-pointer ">
           <img
-            className="lg:h-48 md:h-36 w-full object-cover object-center"
+            className="lg:h-48 md:h-36 w-full object-cover object-center "
             src="https://firebasestorage.googleapis.com/v0/b/thecaffeinecode.appspot.com/o/blog.jpg?alt=media&token=271cb624-94d4-468d-a14d-455377ba75c2"
             alt="blog cover"
           />
