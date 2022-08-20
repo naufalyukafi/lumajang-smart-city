@@ -9,6 +9,7 @@ import Admin from "./pages/Admin/index";
 import { ProtectedRoute } from "./utils/protected.route";
 import AduanMasyarakat from "./pages/AduanMasyarakat";
 import Kegiaatan from "./pages/Kegiatan";
+import UserPublic from "./pages/Public";
 
 function App() {
   return (
@@ -20,6 +21,9 @@ function App() {
           <Route path="detail/:slug" element={<DetailBerita />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route>
+            <Route path="/pemerintahan/*" element={<UserPublic />} />
+          </Route>
           <Route element={<ProtectedRoute allowed={["admin"]} />}>
             <Route path="/admin/*" element={<Admin />} />
           </Route>
