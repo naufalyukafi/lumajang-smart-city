@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const Card = ({ data }) => {
   return (
-    <div className="max-w-full bg-white shadow-md hover:shadow-xl rounded-lg border cursor-pointer border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+    <div className="max-w-full bg-white shadow-md hover:shadow-xl rounded-lg border cursor-pointer border-gray-300 dark:bg-gray-800 dark:border-gray-700">
       <Link to={`/detail/${data.label_slug}`}>
         <img
           className="rounded-md"

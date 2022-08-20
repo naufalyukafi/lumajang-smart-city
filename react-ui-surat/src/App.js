@@ -9,6 +9,8 @@ import Admin from "./pages/Admin/index";
 import { ProtectedRoute } from "./utils/protected.route";
 import AduanMasyarakat from "./pages/AduanMasyarakat";
 import Kegiaatan from "./pages/Kegiatan";
+import AOS from 'aos'
+import "aos/dist/aos.css"
 
 function App() {
   return (

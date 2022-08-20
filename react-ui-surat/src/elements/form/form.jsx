@@ -155,7 +155,7 @@ const Form = () => {
     return (
         <>
             <form className="w-full content-start">
-                <p className="font-bold uppercase text-center  py-2 px-4 rounded mb-4">Pengaduan Masyarakat</p>
+                <p className="font-bold uppercase text-center py-2 px-4 rounded mb-4 text-3xl">Pengaduan Masyarakat</p>
                 <div className="py-2 px-6 mx-auto">
                     <div className="rounded-md flex items-center mb-3">
                         Nama Pelapor
@@ -358,7 +358,7 @@ const Form = () => {
                         helperText={formik.touched.status && formik.errors.status}
                     />
                 </div>
-                <Button onSubmit={onSaveAdd} type="submit" variant="contained">Submit</Button>
+                <Button onSubmit={onSaveAdd} type="submit" variant="contained" sx={{ mx: "auto", width: 150, pr: 4 }} style={{ float: "right", paddingLeft: "1.5rem" }}>Submit</Button>
             </form>
         </>
     )
