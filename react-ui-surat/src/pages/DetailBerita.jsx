@@ -149,7 +149,7 @@ const DetailBerita = () => {
         <div className="desktop:m-2 tablet:m-2 handphone:mx-auto desktop:w-3/12 handphone:w-[90%] tablet:w-[90%]">
 
           {/* <div className="grid grid-cols-1 md:grid-cols-2"></div> */}
-          <p className="mb-14 text-2xl font-medium">Berita Lainnya</p>
+          <p className="laptop:mb-14 tablet:mb-3 handphone:mb-2 text-2xl font-medium">Berita Lainnya</p>
           {!highlight ? (
             <div className="absolute inset-0 flex items-center justify-center">
               <CircularProgress />
