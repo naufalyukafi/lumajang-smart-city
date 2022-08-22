@@ -4,7 +4,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import AddIcon from '@mui/icons-material/Add';
 import { IconButton, CircularProgress, Button, TextField } from '@mui/material'
-import useSWR from 'swr';
+import useSWR, { mutate } from 'swr';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 import swal from 'sweetalert';
@@ -14,18 +14,7 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 import ModalDelete from '../../component/ModalDelete';
 import API from "../../utils/host.config";
-
-const eToast = {
-    icon: "⚠️",
-    style: {
-        minWidth: "250px",
-        border: "1px solid #FF4C4D",
-        padding: "16px",
-        color: "#000",
-        marginBottom: "25px",
-    },
-    duration: 5000,
-};
+import { eToast, sToast, wToast } from "../../utils/toastCustom";
 
 const PosKamling = () => {
     const [openModal, setOpenModal] = useState(false);
@@ -119,16 +108,23 @@ const PosKamling = () => {
             },
         }).then(result => {
             if (result.data.code === 200) {
-                setOpenModal(false)
-                alert(result.data.message)
+                toast.success(result.data.message, sToast);
             } else {
-                alert(result.data.message)
+                toast.success(result.data.message, wToast);
             }
         }).catch(err => {
-            console.log(err.response.data.message)
-            alert(err.response.data.message)
+            if (err.code === "ECONNABORTED") {
+                toast.success(
+                    "Tidak dapat menjangkau Server, Periksa koneksi anda dan ulangi beberapa saat lagi.",
+                    eToast
+                );
+            } else if (err.response) {
+                toast.error(err.response.data.message, eToast);
+            } else {
+                toast.error(err.message, eToast);
+            }
         })
-
+        mutate(`${API.HOST}/admin/pos-kamling`)
     }
 
     const onSaveAdd = async () => {
@@ -144,17 +140,22 @@ const PosKamling = () => {
                 Authorization: "Bearer " + localStorage.getItem("xtoken"),
             },
         }).then(result => {
-            formik.resetForm()
             if (result.data.code === 200) {
-                setOpenAddModal(false)
-                alert(result.data.message)
+                toast.success(result.data.message, sToast);
             } else {
-                alert(result.data.message)
+                toast.success(result.data.message, wToast);
             }
         }).catch(err => {
-            console.log(err.response.data.message)
-            formik.resetForm()
-            alert(err.response.data.message)
+            if (err.code === "ECONNABORTED") {
+                toast.success(
+                    "Tidak dapat menjangkau Server, Periksa koneksi anda dan ulangi beberapa saat lagi.",
+                    eToast
+                );
+            } else if (err.response) {
+                toast.error(err.response.data.message, eToast);
+            } else {
+                toast.error(err.message, eToast);
+            }
         })
     }
 
@@ -165,17 +166,23 @@ const PosKamling = () => {
             },
         }).then(result => {
             if (result.data.code === 200) {
-                setOpenDeleteModal(false)
-                alert(result.data.message)
+                toast.success(result.data.message, sToast);
             } else {
-                alert(result.data.message)
+                toast.success(result.data.message, wToast);
             }
         }).catch(err => {
-            console.log(err.response.data.message)
-            setOpenDeleteModal(false)
-            formik.resetForm()
-            alert(err.response.data.message)
+            if (err.code === "ECONNABORTED") {
+                toast.success(
+                    "Tidak dapat menjangkau Server, Periksa koneksi anda dan ulangi beberapa saat lagi.",
+                    eToast
+                );
+            } else if (err.response) {
+                toast.error(err.response.data.message, eToast);
+            } else {
+                toast.error(err.message, eToast);
+            }
         })
+        mutate(`${API.HOST}/admin/pos-kamling`)
     }
 
     const handleModal = () => setOpenModal(prev => !prev)
@@ -190,11 +197,6 @@ const PosKamling = () => {
             refreshWhenOffline: true,
             loadingTimeout: 45000, //slow network (2G, <= 70Kbps) default 3s
             onLoadingSlow: () => toast.error("Koneksi Anda Buruk", eToast),
-            onSuccess: (data) => {
-                if (data && !data.success) {
-                    toast.error(data.message, eToast);
-                }
-            },
             onError: (err) => {
                 if (err.code === "ECONNABORTED") {
                     toast.error(
