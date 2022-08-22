@@ -3,33 +3,22 @@ import LayoutDashboard from '../../component/LayoutDashboard';
 import EditIcon from '@mui/icons-material/Edit';
 import { IconButton, CircularProgress } from '@mui/material'
 import ModalConfirm from '../../component/ModalConfirm';
-import useSWR from 'swr';
-import axios from 'axios';
+import useSWR from "swr";
 import toast from 'react-hot-toast';
+import axios from 'axios';
+import { eToast } from "../../utils/toastCustom";
 import swal from 'sweetalert';
 import API from "../../utils/host.config";
-
-const eToast = {
-    icon: "⚠️",
-    style: {
-        minWidth: "250px",
-        border: "1px solid #FF4C4D",
-        padding: "16px",
-        color: "#000",
-        marginBottom: "25px",
-    },
-    duration: 5000,
-};
 
 const ListUser = () => {
     const [openModal, setOpenModal] = useState(false);
     const [user, setUser] = useState({})
-    
+
     const handleOpenModal = (data) => {
         setUser(data)
         setOpenModal(true)
     }
-    
+
     const handleModal = () => setOpenModal(prev => !prev)
     const { data: users, error: errorUsers } = useSWR(
         `${API.HOST}/auth/users`,
@@ -43,11 +32,6 @@ const ListUser = () => {
             refreshWhenOffline: true,
             loadingTimeout: 45000, //slow network (2G, <= 70Kbps) default 3s
             onLoadingSlow: () => toast.error("Koneksi Anda Buruk", eToast),
-            onSuccess: (data) => {
-                if (data && !data.success) {
-                    toast.error(data.message, eToast);
-                }
-            },
             onError: (err) => {
                 if (err.code === "ECONNABORTED") {
                     toast.error(

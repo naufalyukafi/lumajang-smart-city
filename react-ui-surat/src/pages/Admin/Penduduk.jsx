@@ -10,7 +10,7 @@ import {
   TextField,
   MenuItem,
 } from "@mui/material";
-import useSWR from "swr";
+import useSWR, { mutate } from "swr";
 import axios from "axios";
 import toast from "react-hot-toast";
 import swal from "sweetalert";
@@ -20,18 +20,7 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 import ModalDelete from "../../component/ModalDelete";
 import API from "../../utils/host.config";
-
-const eToast = {
-  icon: "⚠️",
-  style: {
-    minWidth: "250px",
-    border: "1px solid #FF4C4D",
-    padding: "16px",
-    color: "#000",
-    marginBottom: "25px",
-  },
-  duration: 5000,
-};
+import { eToast, sToast, wToast } from "../../utils/toastCustom";
 
 const Penduduk = () => {
   const [openModal, setOpenModal] = useState(false);
@@ -185,28 +174,24 @@ const Penduduk = () => {
       })
       .then((result) => {
         if (result.data.code === 200) {
-          setOpenModal(false);
-          setPos({
-            nama: "",
-            tanggal_lahir: "",
-            alamat: "",
-            RT: "",
-            RW: "",
-            jenis_kelamin: "",
-            pendidikan: "",
-            pekerjaan: "",
-            phone: "",
-            photo: "",
-          });
-          alert(result.data.message);
+          toast.success(result.data.message, sToast);
         } else {
-          alert(result.data.message);
+          toast.success(result.data.message, wToast);
         }
       })
-      .catch((err) => {
-        console.log(err.response.data.message);
-        alert(err.response.data.message);
-      });
+      .catch(err => {
+        if (err.code === "ECONNABORTED") {
+          toast.success(
+            "Tidak dapat menjangkau Server, Periksa koneksi anda dan ulangi beberapa saat lagi.",
+            eToast
+          );
+        } else if (err.response) {
+          toast.error(err.response.data.message, eToast);
+        } else {
+          toast.error(err.message, eToast);
+        }
+      })
+    mutate(`${API.HOST}/admin/penduduk`)
   };
 
   const onSaveAdd = async () => {
@@ -229,20 +214,24 @@ const Penduduk = () => {
           Authorization: "Bearer " + localStorage.getItem("xtoken"),
         },
       })
-      .then((result) => {
-        formik.resetForm();
+      .then(result => {
         if (result.data.code === 200) {
-          setOpenAddModal(false);
-          alert(result.data.message);
+          toast.success(result.data.message, sToast);
         } else {
-          alert(result.data.message);
+          toast.success(result.data.message, wToast);
+        }
+      }).catch(err => {
+        if (err.code === "ECONNABORTED") {
+          toast.success(
+            "Tidak dapat menjangkau Server, Periksa koneksi anda dan ulangi beberapa saat lagi.",
+            eToast
+          );
+        } else if (err.response) {
+          toast.error(err.response.data.message, eToast);
+        } else {
+          toast.error(err.message, eToast);
         }
       })
-      .catch((err) => {
-        console.log(err.response.data.message);
-        formik.resetForm();
-        alert(err.response.data.message);
-      });
   };
 
   const onDelete = async (id) => {
@@ -252,20 +241,25 @@ const Penduduk = () => {
           Authorization: "Bearer " + localStorage.getItem("xtoken"),
         },
       })
-      .then((result) => {
+      .then(result => {
         if (result.data.code === 200) {
-          setOpenDeleteModal(false);
-          alert(result.data.message);
+          toast.success(result.data.message, sToast);
         } else {
-          alert(result.data.message);
+          toast.success(result.data.message, wToast);
+        }
+      }).catch(err => {
+        if (err.code === "ECONNABORTED") {
+          toast.success(
+            "Tidak dapat menjangkau Server, Periksa koneksi anda dan ulangi beberapa saat lagi.",
+            eToast
+          );
+        } else if (err.response) {
+          toast.error(err.response.data.message, eToast);
+        } else {
+          toast.error(err.message, eToast);
         }
       })
-      .catch((err) => {
-        console.log(err.response.data.message);
-        setOpenDeleteModal(false);
-        formik.resetForm();
-        alert(err.response.data.message);
-      });
+    mutate(`${API.HOST}/admin/penduduk`)
   };
 
   const handleModal = () => setOpenModal((prev) => !prev);
@@ -279,11 +273,6 @@ const Penduduk = () => {
       refreshWhenOffline: true,
       loadingTimeout: 45000, //slow network (2G, <= 70Kbps) default 3s
       onLoadingSlow: () => toast.error("Koneksi Anda Buruk", eToast),
-      onSuccess: (data) => {
-        if (data && !data.success) {
-          toast.error(data.message, eToast);
-        }
-      },
       onError: (err) => {
         if (err.code === "ECONNABORTED") {
           toast.error(
@@ -425,8 +414,8 @@ const Penduduk = () => {
                     </thead>
                     <tbody className="bg-white">
                       {!penduduks ? (
-                         <tr className="absolute inset-0 flex items-center justify-center">
-                            <td><CircularProgress /></td>
+                        <tr className="absolute inset-0 flex items-center justify-center">
+                          <td><CircularProgress /></td>
                         </tr>
                       ) : (
                         penduduks?.results?.map((element, i) => (
