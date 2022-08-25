@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Hero from "../component/Hero";
 import Activity from "../component/Activity";
 import Footer from "../component/Footer";
@@ -11,8 +11,17 @@ import swal from "sweetalert";
 import API from "../utils/host.config";
 import { eToast, wToast } from "../utils/toastCustom";
 import { CircularProgress } from "@mui/material";
+import AOS from 'aos'
 
 const LandingPage = () => {
+
+  useEffect(() => {
+    AOS.init({
+      duration: 2000
+    })
+    AOS.refresh()
+  }, []);
+
   const { data: blog, error: errorBlog } = useSWR(
     `${API.HOST}/user/blogs`,
     (url) =>
@@ -73,9 +82,10 @@ const LandingPage = () => {
       <NavbarMenu />
       {/* <Navbar /> */}
       <Hero />
-      <div className="p-8 mx-auto">
-        <div className="grid grid-cols-1 desktop:grid-cols-2 laptop:grid-cols-2 gap-4 w-4/5 mx-auto">
-          <div className=" laptop:h-64 grid gap-x-0 rounded-md handphone:grid-cols-1 tablet:grid-cols-2 laptop:grid-cols-2 desktop:grid-cols-2">
+      <div className="mx-auto desktop:p-8">
+        <div className="grid grid-cols-1 desktop:grid-cols-2 laptop:grid-cols-2 gap-4 w-[90%] mx-auto">
+          {/* Blog */}
+          <div className=" laptop:h-64 grid gap-x-0 rounded-md handphone:grid-cols-1 tablet:grid-cols-2 laptop:grid-cols-2 desktop:grid-cols-2" data-aos="fade-down">
             {!blog ? (
               <div className="absolute inset-0 flex items-center justify-center">
                 <CircularProgress />
@@ -88,7 +98,7 @@ const LandingPage = () => {
               ))
             )}
           </div>
-          <div className="p-4 rounded-md flex items-center justify-center">
+          <div className="rounded-md flex items-center justify-center" data-aos="fade-down">
             <Form />
           </div>
         </div>

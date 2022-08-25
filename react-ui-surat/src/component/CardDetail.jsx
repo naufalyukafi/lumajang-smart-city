@@ -5,7 +5,7 @@ import idLocale from "moment/locale/id";
 
 const CardDetail = ({ data }) => {
   return (
-    <div className="w-full bg-white rounded-lg dark:bg-gray-800">
+    <div className="w-full laptop:w-[95%] dark:bg-gray-800 mx-auto rounded-lg laptop:ml-[1.9rem]">
       <p className="my-4">
         {moment(data?.updated_date)
           .local("id", idLocale)
