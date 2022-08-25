@@ -10,6 +10,7 @@ import { ProtectedRoute } from "./utils/protected.route";
 import AduanMasyarakat from "./pages/AduanMasyarakat";
 import Kegiaatan from "./pages/Kegiatan";
 import UserPublic from "./pages/Public";
+import FasilitasiPertanahan from "./pages/FasilitasiPertanahan";
 
 function App() {
   return (
@@ -32,6 +33,11 @@ function App() {
           </Route>
           <Route element={<ProtectedRoute allowed={["kim_kegiatan"]} />}>
             <Route path="/kegiatan/*" element={<Kegiaatan />} />
+          </Route>
+          <Route
+            element={<ProtectedRoute allowed={["fasilitasi_pertanahan"]} />}
+          >
+            <Route path="/pertanahan/*" element={<FasilitasiPertanahan />} />
           </Route>
         </Routes>
       </BrowserRouter>

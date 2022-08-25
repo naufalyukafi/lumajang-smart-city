@@ -67,7 +67,6 @@ const LandingPage = () => {
     });
   }
 
-  console.log("user blog cuy ", blog);
 
   return (
     <>
