@@ -11,7 +11,7 @@ import AduanMasyarakat from "./pages/AduanMasyarakat";
 import Kegiaatan from "./pages/Kegiatan";
 import UserPublic from "./pages/Public";
 import FasilitasiPertanahan from "./pages/FasilitasiPertanahan";
-import AOS from 'aos'
+import ProfileDitotrunan from "./pages/ProfileDitotrunan";
 import "aos/dist/aos.css"
 
 function App() {
@@ -21,6 +21,7 @@ function App() {
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/berita" element={<HalBerita />} />
+          <Route path="/profil" element={<ProfileDitotrunan />} />
           <Route path="detail/:slug" element={<DetailBerita />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />

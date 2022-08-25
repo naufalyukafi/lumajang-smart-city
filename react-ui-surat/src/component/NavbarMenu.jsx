@@ -131,6 +131,9 @@ const NavbarMenu = () => {
             Pegawai Kelurahan
           </MenuItem>
         </Menu>
+        <Link to="/profil">
+          <li className="cursor-pointer py-1 hover:border-b-2">Profil Ditotrunan</li>
+        </Link>
       </ul>
       <div className="gap-3 hidden laptop:flex align-middle">
         <Button variant="contained" onClick={() => navigate("/login")}>
