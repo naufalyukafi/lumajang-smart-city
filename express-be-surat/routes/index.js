@@ -1,5 +1,5 @@
 const express = require("express");
-const auth = require("../middleware/auth"); 
+const auth = require("../middleware/auth");
 const router = express.Router();
 const authController = require("./auth.controller")
 const aduanController = require("./aduan.controller")
@@ -11,6 +11,7 @@ const laporanKependudukanController = require("./laporanKependudukan.controller"
 const fasilitasiPertanahanController = require("./fasilitasiPertanahan.controller")
 const fotoGalleryController = require("./fotoGalerry.controller")
 const uploadImages = require("./uploaderImage.controller")
+const fotoPertanahanController = require("./fotoPertanahan.controller")
 
 // Auth
 router.post("/auth/login", authController.loginUser)
@@ -31,19 +32,19 @@ router.delete("/saran/:id", auth.verifikasi(["admin", "aduan_masyarakat"]), adua
 
 // Pos Kamling
 router.get("/poskamling", posKamlingController.getAllPosKamling);
-router.post("/poskamling",  auth.verifikasi(["admin", 'rt', 'rw', "aduan_masyarakat"]), posKamlingController.newPosKamling);
+router.post("/poskamling", auth.verifikasi(["admin", 'rt', 'rw', "aduan_masyarakat"]), posKamlingController.newPosKamling);
 router.put("/poskamling/:id", auth.verifikasi(["admin", 'rt', 'rw', "aduan_masyarakat"]), posKamlingController.updatePosKamling);
 router.delete("/poskamling/:id", auth.verifikasi(["admin", 'rt', 'rw', "aduan_masyarakat"]), posKamlingController.deletePosKamling);
 
 // Penduduk
 router.get("/penduduk", pendudukController.getAllPenduduk);
-router.post("/penduduk",  auth.verifikasi(["admin", 'rt', 'rw']), pendudukController.newPenduduk);
+router.post("/penduduk", auth.verifikasi(["admin", 'rt', 'rw']), pendudukController.newPenduduk);
 router.put("/penduduk/:nik", auth.verifikasi(["admin", 'rt', 'rw']), pendudukController.updatePenduduk);
 router.delete("/penduduk/:nik", auth.verifikasi(["admin", 'rt', 'rw']), pendudukController.deletePenduduk);
 
 // Pegawai
 router.get("/pegawai/:role", pegawaiController.getAllPegawai);
-router.post("/pegawai",  auth.verifikasi(["admin", 'rt', 'rw']), pegawaiController.newPegawai);
+router.post("/pegawai", auth.verifikasi(["admin", 'rt', 'rw']), pegawaiController.newPegawai);
 router.put("/pegawai/:nik", auth.verifikasi(["admin", 'rt', 'rw']), pegawaiController.updatePegawai);
 router.delete("/pegawai/:nik", auth.verifikasi(["admin", 'rt', 'rw']), pegawaiController.deletePegawai);
 
@@ -64,17 +65,24 @@ router.put("/laporan-kependudukan/:id", auth.verifikasi(["admin", 'rt', 'rw']), 
 router.delete("/laporan-kependudukan/:id", auth.verifikasi(["admin", 'rt', 'rw']), laporanKependudukanController.deleteLaporanKependudukan);
 
 // Fasilitasi Pertanahan
-router.get("/fasilitasi-pertanahan", fasilitasiPertanahanController.getAllFasilitasiPertanahan);
-router.post("/fasilitasi-pertanahan",  auth.verifikasi(["admin", 'rt', 'rw', "aduan_masyarakat"]), fasilitasiPertanahanController.newFasilitasiPertanahan);
-router.put("/fasilitasi-pertanahan/:id", auth.verifikasi(["admin", 'rt', 'rw', "aduan_masyarakat"]), fasilitasiPertanahanController.updateFasilitasiPertanahan);
-router.delete("/fasilitasi-pertanahan/:id", auth.verifikasi(["admin", 'rt', 'rw', "aduan_masyarakat"]), fasilitasiPertanahanController.deleteFasilitasiPertanahan);
+router.get("/admin/fasilitasi-pertanahan", auth.verifikasi(["fasilitasi_pertanahan"]), fasilitasiPertanahanController.getAllFasilitasiPertanahan);
+router.get("/employe/fasilitasi-pertanahan", auth.verifikasi(["fasilitasi_pertanahan"]), fasilitasiPertanahanController.getEmployeFasilitasiPertanahan);
+router.get("/fasilitasi-pertanahan/:id", auth.verifikasi(["fasilitasi_pertanahan"]), fasilitasiPertanahanController.getDetailFasilitsaiPertanahan);
+router.post("/fasilitasi-pertanahan", auth.verifikasi(["fasilitasi_pertanahan"]), fasilitasiPertanahanController.newFasilitasiPertanahan);
+router.put("/fasilitasi-pertanahan/:id", auth.verifikasi(["fasilitasi_pertanahan"]), fasilitasiPertanahanController.updateFasilitasiPertanahan);
+router.delete("/fasilitasi-pertanahan/:id", auth.verifikasi(["fasilitasi_pertanahan"]), fasilitasiPertanahanController.deleteFasilitasiPertanahan);
 
 
 // Uploader
-router.post("/uploader/gallery/images", auth.verifikasi(["kim_kegiatan","kim_kegiatan"]), uploadImages.uploadsingleGallery(), fotoGalleryController.fotoGalleryTBaru);
+router.post("/uploader/gallery/images", auth.verifikasi(["kim_kegiatan", "kim_kegiatan"]), uploadImages.uploadsingleGallery(), fotoGalleryController.fotoGalleryTBaru);
+router.post("/uploader/pertanahan/images", auth.verifikasi(["fasilitasi_pertanahan", "fasilitasi_pertanahan"]), uploadImages.uploadsinglePertanahan(), fotoPertanahanController.fotoPertanahanTBaru);
 
 // Foto Gallery
 router.put("/gallery/foto/update/:id", auth.verifikasi("kim_kegiatan"), fotoGalleryController.fotoGalleryUpdate);
 router.delete("/gallery/foto/deleted", auth.verifikasi("kim_kegiatan"), fotoGalleryController.fotoGalleryHapus);
+
+// Foto Pertanahan
+router.put("/pertanahan/foto/update/:id", auth.verifikasi("fasilitasi_pertanahan"), fotoPertanahanController.fotoPertanahanUpdate);
+router.delete("/pertanahan/foto/deleted", auth.verifikasi("fasilitasi_pertanahan"), fotoPertanahanController.fotoPertanahanHapus);
 
 module.exports = router

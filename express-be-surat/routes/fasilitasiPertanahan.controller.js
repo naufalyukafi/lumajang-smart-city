@@ -1,6 +1,6 @@
 const Joi = require("joi");
 const response = require("../response");
-const { fasilitasi_pertanahan } = require("../models");
+const { fasilitasi_pertanahan, foto_pertanahan } = require("../models");
 
 exports.newFasilitasiPertanahan = async (req, res) => {
     const nama_petugas_1 = req.body.nama_petugas_1
@@ -20,10 +20,10 @@ exports.newFasilitasiPertanahan = async (req, res) => {
     const batas_timur = req.body.batas_timur
     const sebab_perubahan_status = req.body.sebab_perubahan_status
     const tanggal_perubahan_status = req.body.tanggal_perubahan_status
-    const foto_denah = req.body.foto_denah
-    const foto_1 = req.body.foto_1
-    const foto_2 = req.body.foto_2
-    const foto_3 = req.body.foto_3
+    const koordinat_utara = req.body.koordinat_utara
+    const koordinat_barat = req.body.koordinat_barat
+    const koordinat_selatan = req.body.koordinat_selatan
+    const koordinat_timur = req.body.koordinat_timur
     const keterangan = req.body.keterangan
 
     await fasilitasi_pertanahan.create(
@@ -45,13 +45,13 @@ exports.newFasilitasiPertanahan = async (req, res) => {
             batas_timur,
             sebab_perubahan_status,
             tanggal_perubahan_status,
-            foto_denah,
-            foto_1,
-            foto_2,
-            foto_3,
+            koordinat_utara,
+            koordinat_barat,
+            koordinat_selatan,
+            koordinat_timur,
             keterangan,
-            created_by: 1,
-            updated_by: 1,
+            created_by: req.auth.id,
+            updated_by: req.auth.id,
             created_date: Date.now(),
             updated_date: Date.now(),
         },
@@ -77,6 +77,53 @@ exports.getAllFasilitasiPertanahan = async (req, res) => {
         });
 };
 
+exports.getEmployeFasilitasiPertanahan = async (req, res) => {
+    await fasilitasi_pertanahan
+        .findAll({
+            order: [["created_date", "DESC"]],
+            raw: true,
+            where: {
+                updated_by: req.auth.id,
+            },
+        })
+        .then(async (result) => {
+            return response.success(result, res);
+        })
+        .catch((error) => {
+            return response.internalServerError(error, res);
+        });
+};
+
+exports.getDetailFasilitsaiPertanahan = async (req, res) => {
+    const schema = Joi.object({
+        id: Joi.string().min(1).max(75).required(),
+    });
+
+    const { error } = schema.validate(req.params);
+    if (error) return response.errorParams(error.message, res);
+
+    const id = req.params.id;
+
+    await fasilitasi_pertanahan.findOne({
+        where: { id: id },
+        raw: true,
+    })
+        .then(async (result) => {
+            if (result) {
+                await foto_pertanahan.findAll({
+                    where: { pertanahan_id: result.id },
+                }).then((data) => {
+                    return response.success({ ...result, listpertanahan: data }, res);
+                }).catch((error) => response.internalServerError(error, res));
+            } else {
+                return response.successWithErrorMsg("Data tidak ditemukan", res);
+            }
+        })
+        .catch((error) => {
+            return response.internalServerError(error, res);
+        });
+};
+
 exports.updateFasilitasiPertanahan = async (req, res) => {
     const nama_petugas_1 = req.body.nama_petugas_1
     const nama_petugas_2 = req.body.nama_petugas_2
@@ -95,11 +142,12 @@ exports.updateFasilitasiPertanahan = async (req, res) => {
     const batas_timur = req.body.batas_timur
     const sebab_perubahan_status = req.body.sebab_perubahan_status
     const tanggal_perubahan_status = req.body.tanggal_perubahan_status
-    const foto_denah = req.body.foto_denah
-    const foto_1 = req.body.foto_1
-    const foto_2 = req.body.foto_2
-    const foto_3 = req.body.foto_3
+    const koordinat_utara = req.body.koordinat_utara
+    const koordinat_barat = req.body.koordinat_barat
+    const koordinat_selatan = req.body.koordinat_selatan
+    const koordinat_timur = req.body.koordinat_timur
     const keterangan = req.body.keterangan
+    console.log(req.auth.id)
     await fasilitasi_pertanahan
         .update({
             nama_petugas_1,
@@ -119,13 +167,13 @@ exports.updateFasilitasiPertanahan = async (req, res) => {
             batas_timur,
             sebab_perubahan_status,
             tanggal_perubahan_status,
-            foto_denah,
-            foto_1,
-            foto_2,
-            foto_3,
+            koordinat_utara,
+            koordinat_barat,
+            koordinat_selatan,
+            koordinat_timur,
             keterangan,
-            created_by: 1,
-            updated_by: 1,
+            created_by: req.auth.id,
+            updated_by: req.auth.id,
             created_date: Date.now(),
             updated_date: Date.now(),
         },
