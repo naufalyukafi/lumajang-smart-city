@@ -169,8 +169,10 @@ const Form = () => {
               formik.errors.status_kependudukan
             }
           >
-            <MenuItem value="Rahasia">Warga Ditotrunan</MenuItem>
-            <MenuItem value="Bukan Rahasia">Bukan Warga Ditotrunan</MenuItem>
+            <MenuItem value="Warga Ditotrunan">Warga Ditotrunan</MenuItem>
+            <MenuItem value="Bukan Warga Ditotrunan">
+              Bukan Warga Ditotrunan
+            </MenuItem>
           </TextField>
         </div>
         <div className="px-6 mb-5">

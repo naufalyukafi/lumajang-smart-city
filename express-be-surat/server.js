@@ -9,12 +9,13 @@ const app = express();
 const port = process.env.PORT || 8000;
 
 app.use(cors());
-app.use(express.json()); 
+app.use(express.json());
 app.use(morgan("dev"));
 app.use(express.urlencoded({ extended: true }));
 app.use(logging)
 
 app.use(`/api/v${process.env.API_VERSION}`, require("./routes"));
-app.use(`/api/v${process.env.API_VERSION}/assets/images/gallery/upload`, express.static("assets/images/gallery/upload")); 
+app.use(`/api/v${process.env.API_VERSION}/assets/images/gallery/upload`, express.static("assets/images/gallery/upload"));
+app.use(`/api/v${process.env.API_VERSION}/assets/images/pertanahan/upload`, express.static("assets/images/pertanahan/upload"));
 
 app.listen(port, () => console.log(`App listening on port http://localhost:${port}!`));

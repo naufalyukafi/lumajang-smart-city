@@ -15,7 +15,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       tanggal_ukur: {
-        type: Sequelize.BIGINT
+        type: Sequelize.STRING
       },
       nama_pemilik_tanah: {
         type: Sequelize.STRING
@@ -59,17 +59,17 @@ module.exports = {
       tanggal_perubahan_status: {
         type: Sequelize.BIGINT
       },
-      foto_denah: {
-        type: Sequelize.TEXT
+      koordinat_utara: {
+        type: Sequelize.BIGINT
       },
-      foto_1: {
-        type: Sequelize.TEXT
+      koordinat_selatan: {
+        type: Sequelize.BIGINT
       },
-      foto_2: {
-        type: Sequelize.TEXT
+      koordinat_timur: {
+        type: Sequelize.BIGINT
       },
-      foto_3: {
-        type: Sequelize.TEXT
+      koordinat_barat: {
+        type: Sequelize.BIGINT
       },
       keterangan: {
         type: Sequelize.TEXT
