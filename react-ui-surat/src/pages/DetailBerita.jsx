@@ -140,7 +140,7 @@ const DetailBerita = () => {
       <div className="flex flex-col items-start justify-center desktop:flex-row laptop:flex-col" data-aos="fade-down">
 
         <div className="desktop:m-2 tablet:m-2 handphone:mx-auto handphone:my-3 w-[90%] desktop:w-[50%]">
-          <p className="max-w-6xl capitalize mx-auto font-bold desktop:text-3xl handphone:text-xl laptop:ml-[1.9rem]">
+          <p className="max-w-6xl capitalize mx-auto font-bold desktop:text-3xl handphone:text-xl">
             {blog?.results?.title}
           </p>
           <CardDetail data={blog} />
