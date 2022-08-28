@@ -85,9 +85,9 @@ const LandingPage = () => {
       <div className="mx-auto desktop:p-8">
         <div className="grid grid-cols-1 desktop:grid-cols-2 laptop:grid-cols-2 gap-4 w-[90%] mx-auto">
           {/* Blog */}
-          <div className=" laptop:h-64 grid gap-x-0 rounded-md handphone:grid-cols-1 tablet:grid-cols-2 laptop:grid-cols-2 desktop:grid-cols-2" data-aos="fade-down">
+          <div className=" laptop:h-64 grid gap-x-0 rounded-md handphone:grid-cols-1 tablet:grid-cols-2 laptop:grid-cols-2 desktop:grid-cols-2" data-aos="fade-down" >
             {!blog ? (
-              <div className="absolute inset-0 flex items-center justify-center">
+              <div className="absolute inset-0 flex items-center justify-center" >
                 <CircularProgress />
               </div>
             ) : (

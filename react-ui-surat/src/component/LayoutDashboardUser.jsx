@@ -8,7 +8,7 @@ const LayoutDashboardUser = ({ children }) => {
     >
       <main>
         <div className="container mx-auto flex justify-between items-center">
-          <div className="laptop:mx-10 w-full my-10">{children}</div>
+          <div className="w-full my-10">{children}</div>
         </div>
       </main>
     </div>

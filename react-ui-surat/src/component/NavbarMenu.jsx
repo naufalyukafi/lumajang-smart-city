@@ -82,8 +82,8 @@ const NavbarMenu = () => {
 
   return (
     <div className="mx-2 laptop:container laptop:mx-auto flex justify-between items-center h-24 text-gray-800">
-      <Link to="/">
-        <div className="flex items-center rounded-md px-8 py-1">
+      <Link to="/" >
+        <div className="flex justify-items-start items-center rounded-md py-1">
           <img src={ImageLogo} alt={ImageLogo} className="h-16" />
           <p className="text-base text-center font-semibold p-2">
             Kabupaten <br /> Lumajang
