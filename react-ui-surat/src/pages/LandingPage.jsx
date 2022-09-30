@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import Hero from "../component/Hero";
 import Activity from "../component/Activity";
 import Footer from "../component/Footer";
-import Form from "../elements/form/form";
+// import Form from "../elements/form/form";
 import NavbarMenu from "../component/NavbarMenu";
 import useSWR from "swr";
 import axios from "axios";
@@ -82,27 +82,23 @@ const LandingPage = () => {
       <NavbarMenu />
       {/* <Navbar /> */}
       <Hero />
-      <div className="mx-auto desktop:p-8">
-        <div className="grid grid-cols-1 desktop:grid-cols-2 laptop:grid-cols-2 gap-4 w-[90%] mx-auto">
-          {/* Blog */}
-          <div className=" laptop:h-64 grid gap-x-0 rounded-md handphone:grid-cols-1 tablet:grid-cols-2 laptop:grid-cols-2 desktop:grid-cols-2" data-aos="fade-down" >
+      <section className="overflow-hidden text-gray-700">
+        <div className="container px-5 py-2 mx-auto desktop:pt-12 desktop:px-10">
+          <div className="flex flex-wrap">
             {!blog ? (
-              <div className="absolute inset-0 flex items-center justify-center" >
+              <div>
                 <CircularProgress />
               </div>
             ) : (
               blog?.results?.map((element, index) => (
-                <div key={index}>
+                <div key={index} className="flex flex-wrap w-1/3">
                   <Activity data={element} />
                 </div>
               ))
             )}
           </div>
-          <div className="rounded-md flex items-center justify-center" data-aos="fade-down">
-            <Form />
-          </div>
         </div>
-      </div>
+      </section>
       <Footer />
     </>
   );

@@ -127,8 +127,8 @@ const Form = () => {
 
   return (
     <>
-      <form className="w-full content-start">
-        <p className="font-bold uppercase text-center  px-4 rounded mb-4">
+      <form className="w-full">
+        <p className="font-bold uppercase text-center px-4 rounded mb-4">
           Pengaduan Masyarakat
         </p>
         <div className="px-6 mb-5">
