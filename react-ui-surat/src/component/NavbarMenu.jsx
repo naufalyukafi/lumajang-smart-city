@@ -97,6 +97,9 @@ const NavbarMenu = () => {
         <Link to="/ajukan-surat">
           <li className="cursor-pointer py-1 hover:border-b-2">Ajukan Surat</li>
         </Link>
+        <Link to="/pengaduan-masyarakat">
+          <li className="cursor-pointer py-1 hover:border-b-2">Pengaduan Masyarakat</li>
+        </Link>
         <li
           className="cursor-pointer py-1 hover:border-b-2"
           onClick={handleClick}

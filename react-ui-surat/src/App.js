@@ -13,6 +13,7 @@ import UserPublic from "./pages/Public";
 import FasilitasiPertanahan from "./pages/FasilitasiPertanahan";
 import ProfileDitotrunan from "./pages/ProfileDitotrunan";
 import AjukanSurat from "./pages/AjukanSurat";
+import PengaduanMasyarakat from "./pages/PengaduanMasyarakat";
 import "aos/dist/aos.css"
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
           <Route path="/berita" element={<HalBerita />} />
           <Route path="/profil" element={<ProfileDitotrunan />} />
           <Route path="/ajukan-surat" element={<AjukanSurat />} />
+          <Route path="/pengaduan-masyarakat" element={<PengaduanMasyarakat />} />
           <Route path="detail/:slug" element={<DetailBerita />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />

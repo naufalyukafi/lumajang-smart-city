@@ -3,11 +3,11 @@ import { Link } from "react-router-dom";
 
 const Activity = ({ data }) => {
   return (
-    <div className="p-4">
+    <div className="w-full p-1 desktop:p-4">
       <Link to={`/detail/${data.label_slug}`}>
-        <div className="h-full shadow-md hover:shadow-xl rounded-lg overflow-hidden cursor-pointer ">
+        <div className="block object-cover object-center w-full h-full rounded-lg border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
           <img
-            className="lg:h-48 md:h-36 w-full object-cover object-center "
+            className="w-full object-cover object-center mr-4 "
             src="https://firebasestorage.googleapis.com/v0/b/thecaffeinecode.appspot.com/o/blog.jpg?alt=media&token=271cb624-94d4-468d-a14d-455377ba75c2"
             alt="blog cover"
           />
